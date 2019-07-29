@@ -1,0 +1,4 @@
+在layui中，分页是用page和limit进行分页的，但是如果某些接口不是用page分页而是用别的参数进行分页，那么可能就需要更改table.js文件了，前提是这个接口有没有page都不影响。
+使用request函数修改page的名称为新参数的接口名称，然后在table.js中找到pageName:"page",limitName:"limit"
+r[l.pageName]=a.limit*(e-1)，pageName修改的是js默认的page名称，在这里修改就不需要在request函数中修改，r[l.pageName]修改的是page默认的传值，e代表1，每次点击分页就加1，因为数据库的默认开始是0，所以需要-1.
+在laiui的弹出层中，一般用来点击按钮弹出层的话，如果按钮的标签是button的话，那么就不要添加form标签，不然会报错！一般用来写按钮都是用div或者是input type="button"去表达，这样可以兼容form标签。

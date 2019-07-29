@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>创维项目立项模块人员添加</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <link rel="stylesheet" href="../../assets/libs/layui/css/layui.css" media="all">
+    <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+    <link rel="stylesheet" href="../../assets/module/dtree/dtree.css" media="all">
+    <link rel="stylesheet" href="../../assets/module/dtree/font/dtreefont.css" media="all">
+
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+        .select-test {
+            position: absolute;
+            max-height: 500px;
+            height: 350px;
+            overflow: auto;
+            width: 100%;
+            z-index: 123;
+            display: none;
+            border: 1px solid silver;
+            top: 42px;
+        }
+
+        .layui-show {
+            display: block !important;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="layui-container" style="margin-left: 6%; margin-top: 6%">
+    <form class="layui-form">
+        <!--模块选择-->
+        <div class="layui-form layui-form-pane" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属模块</label>
+                <div class="layui-input-inline" style="width: 65%">
+                    <select name="module" lay-filter="moduleChoice" lay-verify="modules">
+                        <option value=""></option>
+                        <option value="业务模块" selected="">业务模块</option>
+                        <option value="计划模块">计划模块</option>
+                        <option value="质量模块">质量模块</option>
+                        <option value="工程模块">工程模块</option>
+                        <option value="生产模块">生产模块</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--部门选择-->
+        <div class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属部门</label>
+                <div class="layui-input-inline" style="width: 65%">
+                    <div class="layui-unselect layui-form-select" id="departmentChoice">
+                        <div class="layui-select-title">
+                            <input type="text" name="department" id="input_department" placeholder="请选择部门" readonly=""
+                                   class="layui-input layui-unselect" lay-verify="department">
+                            <i class="layui-edge"></i>
+                        </div>
+                    </div>
+                    <div class="layui-card select-test" id="departmentChoice-select">
+                        <div class="layui-card-body">
+                            <div id="toolbarDiv1">
+                                <ul id="slTree1" class="dtree" data-id="0" style="width: 100%;"></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--人员选择-->
+        <div class="layui-form layui-form-pane" id="departmentPeopleChoice">
+            <div class="layui-form-item">
+                <label class="layui-form-label">部门人员</label>
+                <div class="layui-input-inline" style="width: 65%">
+                    <select name="departmentPeople" id="departmentPeopleChoice1" lay-verify="departmentPeople">
+                        <option value="">请选择人员</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!--人员职责-->
+        <div class="layui-form layui-form-pane">
+            <div class="layui-form-item layui-form-text" style="width: 92%;">
+                <label class="layui-form-label">人员职责</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea" name="PersonnelResponsibilities" lay-verify="PeopleForWork"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!--    确认提交按钮-->
+<!--        <div class="layui-form layui-form-pane">-->
+<!--            <div class="layui-form-item layui-form-text" style="width: 92%;">-->
+<!--                <div class="layui-btn" lay-submit="" lay-filter="Personnel-submission" style="margin-left: 68%;">提交-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div class="form-group-bottom text-right" style="margin: 0 auto; width: 96%;">
+            <button type="reset" class="layui-btn layui-btn-primary">&emsp;重置&emsp;</button>
+            <button class="layui-btn" lay-filter="modelSubmitUser" lay-submit>&emsp;提交&emsp;</button>
+        </div>
+    </form>
+</div>
+
+</body>
+
+<script type="text/javascript" src="../../assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="../../assets/js/common.js?v=312"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+
+<script>
+    layui.use(['dtree', 'form', 'layer', 'jquery'], function () {
+        var dtree = layui.dtree, layer = layui.layer, form = layui.form, $ = layui.jquery;
+
+        // 定义一个departmentid变量
+        var departmentId = null;
+        // 定义一个下拉框展开的boolean变量，默认关闭false
+        var selectbl = false;
+
+        // 定义一个其他下拉框是否展开的boolean变量，默认false
+        var selectbl1 = false;
+
+        // 通过ajax请求将tree组件默认加载到指定的元素中
+        $.ajax({
+            type: "GET",
+            headers:{
+                "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyVG9rZW4iOiJ7XCJpZFwiOjUxLFwibmFtZVwiOlwibGliaW5nbGluXCIsXCJjb2RlXCI6XCJza3kyMDYxOTNcIixcImZpbHRlclwiOm51bGx9In0.ARKC424DcHGGTTQiiO7V6HVCq5Zj1yBMu2JHZTbKjjs'
+            },
+            url: "http://172.20.248.220:8088/dms/safe_usercenter/safe/department/getDepartmentTree",
+            success: function (res) {
+                // console.log(res);
+
+                // 将res对象转换成json对象
+                // var resjson = $.parseJSON(res);
+
+                //初始化树
+                var DTree = dtree.render({
+                    elem: "#slTree1",
+                    data: [res],
+                    response: {title: 'text'}, // 这里指定了返回的数据格式，组件会根据这些值来替换返回JSON中的指定格式，从而读取信息
+                    // ficon: "-1",  // 隐藏一级图标
+                    // dot: false,  // 隐藏小圆点
+                    icon: -1,
+                    line: true,
+                    accordion: false,
+                    cache: true,
+                    initLevel: 8
+                });
+            }
+        });
+
+        // 点击人员选择的下拉框之后更改下拉框的默认boolean
+        $("#departmentPeopleChoice").on("click", function () {
+            selectbl1 = true;
+        });
+
+        // 当点击部门选择的下拉框时触发的class添加事件，将其他展开的下拉框隐藏。
+        $("#departmentChoice").on("click", function () {
+            // 因为该元素也属于document元素，所以要阻止该事件的冒泡事件，即document的事件对该元素无效
+            event.stopPropagation();
+            $(this).toggleClass("layui-form-selected"); // 控制旁边的小三角符号
+            $("#departmentChoice-select").toggleClass("layui-show layui-anim layui-anim-upbit"); // show控制select下拉框的是否显示，anim和upbit控制显示的动画效果
+
+            // 判断当前人员选择下拉框的boolean是否展开，如果展开将其class去除
+            if (selectbl1) {
+                $("#departmentPeopleChoice .layui-form-selected").removeClass("layui-form-selected");
+            }
+            // 当点击按钮时，下拉框展开，默认selectbl为true状态设定
+            selectbl = true;
+        });
+
+        // 点击空白处隐藏部门选择的下拉框事件
+        $(document).on("click", function (e) {
+            // console.log(selectbl);
+            if (selectbl) {
+                // console.log(selectbl);
+                $("#departmentChoice-select").removeClass("layui-show");
+            }
+        });
+
+        // 当选择部门选择下拉框的tree节点所触发的事件
+        dtree.on("node(slTree1)", function (obj) {
+            // 将用户选择的tree组件的值传送到父页面当中
+            $("#input_department").val(obj.param.context);
+            $("#departmentChoice").toggleClass("layui-form-selected");
+            $("#departmentChoice-select").toggleClass("layui-show layui-anim layui-anim-upbit");
+
+            // 获取用户选择的tree组件的节点的部门ID
+            departmentId = obj.param.nodeId;
+
+            // 点击tree组件节点之后发送ajax请求到指定的接口，动态添加html到option当中
+            $.ajax({
+                type: "GET",
+                headers:{
+                    "token":'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VyVG9rZW4iOiJ7XCJpZFwiOjUxLFwibmFtZVwiOlwibGliaW5nbGluXCIsXCJjb2RlXCI6XCJza3kyMDYxOTNcIixcImZpbHRlclwiOm51bGx9In0.ARKC424DcHGGTTQiiO7V6HVCq5Zj1yBMu2JHZTbKjjs'
+                },
+                url: "http://172.20.248.220:8088/dms/safe_usercenter/safe/user/getUsersListByDepartmentId?departmentId=" + departmentId + "&start=0&limit=100",
+                success: function (res1) {
+                    // 将res对象转换成json对象
+                    var res1json = $.parseJSON(res1);
+                    console.log(res1json);
+                    $("#departmentPeopleChoice1").empty();
+                    $("#departmentPeopleChoice1").append("<option value=''>请选择人员</option>");
+                    for (var i = 0; i < res1json.result.length; i++) {
+
+                        $("#departmentPeopleChoice1").append("<option value='" + res1json.result[i].realName + "' type='text'>" + res1json.result[i].realName + "</option>");
+
+                    }
+
+                    // 对目标form表单进行动态的重新渲染
+                    form.render();
+
+                }
+            });
+        });
+
+        form.verify({
+            modules: function (value) {
+                if (value.length < 1) {
+                    return '请选择所属模块！';
+                }
+            },
+            // pass: [/(.+){6,12}$/, '密码必须6到12位'],
+            department: function (value) {
+                if (value.length < 1) {
+                    return '请选择所属部门！';
+                }
+            },
+            departmentPeople: function (value) {
+                if (value.length < 1) {
+                    return '请选择所属人员！';
+                }
+            },
+            PeopleForWork: function (value) {
+                if (value.length < 1) {
+                    return '请输入人员职责！';
+                }
+            }
+        });
+
+        // 提交监听
+        // form.on('submit(modelSubmitUser)', function (selectdata) {
+        //     // console.log(selectdata.field);
+        //     layer.msg('提交成功！', {
+        //         time: 680
+        //     },function () {
+        //         var qwe = JSON.stringify(selectdata.field);
+        //         console.log(qwe);
+        //         console.log(parent);
+        //         // 通过index将iframe层关闭
+        //         // var index = parent.layer.getFrameIndex(window.name);
+        //         // parent.layer.close(index);
+        //         // // 关闭后刷新父页面
+        //         // parent.location.reload();
+        //         // parent.table.reload();
+        //     });
+        //     return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        // });
+    });
+</script>
+
+
+</html>

@@ -1,0 +1,406 @@
+根据systemid查询角色列表
+http://172.20.73.16:8899/safe_usercenter/safe/role/getRolesBySystemIds?systemIds=0,1,2&start=0&limit=10
+
+
+
+获取部门树
+http://172.20.73.16:8899/safe_usercenter/safe/department/getDepartmentTree
+
+
+获取部门树 包含已经删除
+http://172.20.73.16:8899/safe_usercenter/safe/department/getAllDepartmentTree
+
+http://172.20.73.16:8899/safe_usercenter/safe/department/addDepartment  DepartmentView对象 json
+
+http://172.20.73.16:8899/safe_usercenter/safe/department/updateDepartment  DepartmentView对象 json
+
+http://172.20.73.16:8899/safe_usercenter/safe/department/deleteDepartment?id=7
+
+
+修改用户状态
+http://172.20.73.16:8899/safe_usercenter/safe/user/updateUserStatus?id=2&status=1    修改用户状态 1正常 2禁用
+
+
+根据用户ID获取用户信息
+http://172.20.73.16:8899/safe_usercenter/safe/user/getUserByUserId?id=2
+
+
+根据用户名称获取用户信息
+http://172.20.73.16:8899/safe_usercenter/safe/user/getUserByUserName?username=qxf
+http://172.20.73.16:8899/safe_usercenter/safe/user/getUserLikeName?name=
+
+
+获取用户列表
+http://172.20.73.16:8899/safe_usercenter/safe/user/getUsersList
+根据部门ID获取用户列表
+http://172.20.73.16:8899/safe_usercenter/safe/user/getUsersListByDepartmentId?departmentId=0&start=0&limit=10
+
+
+
+修改用户角色
+http://172.20.73.16:8899/safe_usercenter/safe/user/updateUserRole?id=1&roleIds=1,2,3
+
+修改用户系统
+http://172.20.73.16:8899/safe_usercenter/safe/user/updateUserSystem?id=1&systemIds=1,2,3
+修改用户部门
+http://172.20.73.16:8899/safe_usercenter/safe/user/updateUserDepartment?id=1&departmentIds=8,9
+更新密码
+http://172.20.73.16:8899/safe_usercenter/safe/user/updatePassword?id=2&pwOld=123&pwNew=Sa111
+
+
+
+
+增加用户
+http://172.20.73.16:8899/safe_usercenter/safe/user/addUser
+修改用户
+http://172.20.73.16:8899/safe_usercenter/safe/user/updateUser 
+
+
+获取所有系统
+http://172.20.73.16:8899/safe_usercenter/safe/syss/getSystems
+
+
+根据 角色获取权限
+http://172.20.73.16:8899/safe_usercenter/safe/function/getFunctionTreeByRoleId?roleId=1
+
+http://172.20.73.16:8899/safe_usercenter/safe/function/updateSingleRoleFunction?roleId=1&functionId=MES_B_DEVICE_INFO&selected=true
+
+http://172.20.73.16:8899/safe_usercenter/safe/function/updateRoleFunctions  RoleFunc对象 json
+
+
+增加角色
+http://172.20.73.16:8899/safe_usercenter/safe/role/addRole
+修改角色
+http://172.20.73.16:8899/safe_usercenter/safe/role/updateRole
+删除角色
+http://172.20.73.16:8899/safe_usercenter/safe/role/deleteRole?id=8855
+
+获取所有角色
+http://172.20.73.16:8899/safe_usercenter/safe/role/getRoles?start=0&limit=10
+
+根据systemid查询角色列表
+http://172.20.73.16:8899/safe_usercenter/safe/role/getRolesBySystemIds?systemIds=1,2&start=0&limit=100
+
+根据用户查询角色列表
+http://172.20.73.16:8899/safe_usercenter/safe/role/getRolesByUserId?id=1
+
+
+*********************************************************************新增************************************************************
+
+获取字典列表
+http://172.20.73.16:8899/safe_usercenter/dict/getTitles
+
+获取某一个字典的值
+http://172.20.73.16:8899/safe_usercenter/dict/getByTitle?title=ALARM_TYPE
+
+
+增加字典
+http://172.20.73.16:8899/safe_usercenter/dict/addTitle
+
+增加字典值
+http://172.20.73.16:8899/safe_usercenter/dict/addSubTitle
+
+
+删除字典
+http://172.20.73.16:8899/safe_usercenter/dict/deleteTitle?title=
+删除字典值
+http://172.20.73.16:8899/safe_usercenter/dict/deleteSubItem?title=ALAl&itemId=100
+**********************************************************
+	private Integer id;
+
+    private String code;//代码 
+
+    private String name;//名称
+
+    private Integer dataType;//数据类型 不需要填写
+
+    private String bak;//备注描述
+
+    private Integer parentId;//父节点ID
+
+    private Integer status;  默认1
+
+    private	Integer	capacity;//产能
+    
+    private	Integer	base;//基地ID  增加工厂时，必填
+	
+获取基地
+http://172.20.73.16:8899/safe_usercenter/base/getBase
+
+	
+获取集团   组织架构增加都是 Organize对象 json字符串
+http://172.20.73.16:8899/safe_usercenter/base/getGroup
+http://172.20.73.16:8899/safe_usercenter/base/addGroup
+
+获取产业公司
+http://172.20.73.16:8899/safe_usercenter/base/getCompany
+http://172.20.73.16:8899/safe_usercenter/base/addCompany
+
+获取制造总部
+http://172.20.73.16:8899/safe_usercenter/base/getManufCenter
+http://172.20.73.16:8899/safe_usercenter/base/addManufCenter
+获取工厂
+http://172.20.73.16:8899/safe_usercenter/base/getFactory
+http://172.20.73.16:8899/safe_usercenter/base/addFactory
+获取工厂子部门
+http://172.20.73.16:8899/safe_usercenter/base/getFactorySubDepartment
+http://172.20.73.16:8899/safe_usercenter/base/addFactroySubDepartment
+获取线体
+http://172.20.73.16:8899/safe_usercenter/base/getLine
+http://172.20.73.16:8899/safe_usercenter/base/addLine
+
+获取公司子部门
+http://172.20.73.16:8899/safe_usercenter/base/getCompanyDepartmet
+http://172.20.73.16:8899/safe_usercenter/base/addCompanyDepartment
+
+获取公司子部门科室
+http://172.20.73.16:8899/safe_usercenter/base/getOffice
+http://172.20.73.16:8899/safe_usercenter/base/addOffice
+
+这个可以检测CODE是否重复
+http://172.20.73.16:8899/safe_usercenter/base/checkCode?code=
+
+
+------------------------------------------------**************------------------------------------------------------------------------
+
+这个可以检测CODE是否重复
+http://172.20.73.16:8899/safe_usercenter/base/checkCode?code=  
+
+
+根据工厂代码获取线体
+http://172.20.73.16:8899/safe_usercenter/base/getLineByFactoryCode?code=
+
+根据基地代码获取线体
+http://172.20.73.16:8899/safe_usercenter/base/getLineByBaseCode?code=0755
+
+获取基地
+http://172.20.73.16:8899/safe_usercenter/base/getBase
+
+获取基地
+http://172.20.73.16:8899/safe_usercenter/base/getFactoryByBase?code=0755
+
+
+*************************************************************************************************************************
+
+http://172.20.73.16:8080/mes/dailySixPlan/lock?id=1&lockType=1
+根据线体获取工位
+http://172.20.73.16:8080/mes/base/getWStationByLineCode?code=PBA
+http://172.20.73.16:8080/mes/base/addWStation
+http://172.20.73.16:8080/mes/base/updateWStation
+http://172.20.73.16:8080/mes/base/deleteWStation?id=
+
+
+根据工厂 和 工序名称查询 模糊查找 工序
+http://172.20.73.16:8080/mes/base/getWProcedureByFactoryLikeName?code=&name=
+
+根据工厂获取工序
+http://172.20.73.16:8080/mes/base/getWProcedureByFactory?code=1100
+http://172.20.73.16:8080/mes/base/addWProcedure
+http://172.20.73.16:8080/mes/base/updateWProcedure
+http://172.20.73.16:8080/mes/base/deleteWProcedure?id=
+
+获取产品类型
+http://172.20.73.16:8080/mes/base/getProductType
+
+
+根据线体获取信息站点。
+http://172.20.73.16:8080/mes/base/getSitesByLineCode?code=PBA
+http://172.20.73.16:8080/mes/base/addSite
+http://172.20.73.16:8080/mes/base/updateSite
+http://172.20.73.16:8080/mes/base/deleteSite?id=
+
+
+//标准BOM列表
+http://172.20.73.16:8080/mes/bom/getStandBom?start=0&limit=10
+
+根据标准BOM编号和工厂获取标准BOM
+http://172.20.73.16:8080/mes/bom/getStandBomMeterByFactoryAndBomNo?bomNo=7S6055U70000FPNE00&factoryCode=1100
+
+根据标准BOM编号和工厂获取标准BOM Tree
+http://172.20.73.16:8080/mes/bom/getStandBomMeterTreeByFactoryAndBomNo?bomNo=7S6055U70000FPNE00&factoryCode=1100
+
+工单制造BOM物料拆分 ov +nv =原值 double型 
+http://172.20.73.16:8080/mes/bom/spliterMesOrderBomMeter?id=&ov=&nv=
+
+增加SAP工单 相关信息
+http://172.20.73.16:8080/mes/bom/addMesOrderBomAll?aufnr=102000026187&mesOrderId=10200002618701&matnr=7S6055U70000FPNE00&factoryCode=1100
+http://172.20.73.16:8080/mes/bom/addMesOrderBomAll?aufnr=102000026741&mesOrderId=10200002674101&matnr=6S4732E1C000FPNE01&factoryCode=1100
+
+根据SAP工单及版本获取BOM信息
+http://172.20.73.16:8080/mes/bom/getMesOrderBomMeterial?aufnr=102000026187&version=001
+
+根据SAP工单及版本获取BOM信息
+http://172.20.73.16:8080/mes/bom/getMesOrderBomMeterialTree?aufnr=102000026187&version=001
+
+获取工单BOM的版本列表 
+http://172.20.73.16:8080/mes/bom/getMesOrderBomVersions?mesOrderId=10200002618701
+
+MES bom版本升级 
+http://172.20.73.16:8080/mes/bom/upgradeMesOrderBomVersion?mesOrderId=10200002618701
+
+http://172.20.73.16:8080/mes/order/getOrders?start=0&limit=10
+
+
+http://172.20.73.16:8080/mes/bom/getMesBom?start=0&limit=10
+http://172.20.73.16:8080/mes/dict/getByTitle?title=STATION_TYPE
+http://172.20.73.16:8080/mes/dict/getByTitle?title=STATION_CATEGORY
+http://172.20.73.16:8080/mes/dict/getByTitle?title=STATION_FUNCTION
+
+
+显示MES工单列表
+http://172.20.73.16:8080/mes/order/getMesOrder?start=0&limit=10
+
+显示工单 工艺列表
+http://172.20.73.16:8080/mes/bom/getMesOrderTech?start=0&limit=10
+
+http://172.20.73.16:8080/mes/bom/initMesOrderTech?mesOrderId=10200002674101
+
+根据MES工单显示SAPBOM
+http://172.20.73.16:8080/mes/bom/getSapOrderMaterial?mesOrderId=&version=&aufnr=
+
+根据MES工单ID和版本显示工艺路线
+http://172.20.73.16:8080/mes/bom/getMesOrderTechDetail?mesOrderId=10200002674101&version=001
+
+根据工艺路线的ID显示 该工艺下面的绑定物料
+http://172.20.73.16:8080/mes/bom/getMesOrderTechMaterial?techDetailsId=03434D5B6BE945588501219A21E2635B
+
+http://172.20.73.16:8080/mes/bom/addMesOrderTechMaterial?mesOrderId=&techDetailsId=&version=&aufnr=&rspos=&matnr=&bdmng
+http://172.20.73.16:8080/mes/bom/removeMesOrderTechMaterial?id=
+
+修改工艺路线里面的工位相关数据
+http://172.20.73.16:8080/mes/bom/updateMesOrderTechDetail
+
+修改已经选中的物料数量
+http://172.20.73.16:8080/mes/bom/updateMesOderTechMaterBdmng?id=&bdmng=修改已经选中的物料数量
+http://172.20.73.16:8080/mes/bom/spliterMesOrderTechMater?id=&useValue=修改已经选中的物料数量
+
+
+工艺路线版本升级
+http://172.20.73.16:8080/mes/bom/upgradeMesOrderTechVersion?mesOrderId=10200002674101
+
+工艺版本列表
+http://172.20.73.16:8080/mes/bom/getMesOrderTechVersions?mesOrderId=022210200002679401
+工艺版本切换
+http://172.20.73.16:8080/mes/bom/changeMesOrderTechVersion?mesOrderId=022210200002679401&version=002
+ 
+
+
+
+	
+	
+工艺锁定
+http://172.20.73.16:8080/mes/order/lockMesOrder?mesOrderId=10200002674101
+
+工艺解锁
+http://172.20.73.16:8080/mes/order/unlockMesOrder?mesOrderId=10200002674101
+
+
+获取已经锁定的工单 （还有以下参数）
+(int start,int limit,String factoryCode,String lineCode,String aufnr,Long st,Long ft,Integer orderType,Integer orderStatus,Integer abnormal)
+http://172.20.73.16:8080/mes/order/getLockMesOrder?start=0&limit=10?aufnr=
+
+工单取消
+http://172.20.73.16:8080/mes/order/cancelMesOrder?mesOrderId=10200002674101
+
+工单启动
+http://172.20.73.16:8080/mes/order/startMesOrder?mesOrderId=10200002674101
+
+整机投入
+http://172.20.73.16:8080/mes/order/putintoMesOrder?mesOrderId=10200002674101
+
+工单暂停
+http://172.20.73.16:8080/mes/order/pauseMesOrder?mesOrderId=10200002674101
+
+工单完工
+http://172.20.73.16:8080/mes/order/finishMesOrder?mesOrderId=10200002674101
+
+生产停线
+http://172.20.73.16:8080/mes/order/stopLineMesOrder?mesOrderId=10200002674101
+
+
+	public final static int ORDER_TECH_UNLOCK=0;//未锁定
+	public final static int ORDER_TECH_LOCK=1;//已锁定
+	
+    public final static int ORDER_STATUS_CREATE=0;//工单创建
+	public final static int ORDER_STATUS_CANCEL=1;//工单取消
+	public final static int ORDER_STATUS_START =2;//工单启动
+	public final static int ORDER_STATUS_PUTINTO=3;//整机投入
+	public final static int ORDER_STATUS_PAUSE=4;//工单暂停
+	public final static int ORDER_STATUS_STOPLINE=5;//生产停线
+	public final static int ORDER_STATUS_FINISH=6;//工单完工
+
+获取可以进行整机投入的 工单   信息站点使用
+http://172.20.73.16:8080/mes/order/getCanDoMesOrder?lineCode=PBA&st=&ft=
+根据ID 获取工单 
+http://172.20.73.16:8080/mes/order/getMesOrderViewById?id=021910200002674101
+
+
+根据信息站点UUID获取相关信息   信息站点使用
+http://172.20.73.16:8080/mes/base/getInfoBySiteUUID?siteUUID=00D37818434942BAAAE4648CF9A3DE1C
+
+获取线体 正在投产的工单  信息站点使用
+http://172.20.73.16:8080/mes/order/getCurrentPutIntoMesOrderViewByLineCode?lineCode=PBA
+
+上报信息站点数据
+http://172.20.73.16:8080/mes/order/upSitePassInfo  // 信息站点使用  
+
+
+获取过站记录列表
+http://172.20.73.16:8080/mes/order/getPassSiteInfo?mesOrderId=021910200002652201&workStationCode=0010&start=0&limit=30
+
+
+线体产量看板 String lineCode,Long planDate 时间戳,int start,int limit
+http://172.20.73.16:8080/mes/kb/getLineYield?lineCode=&planDate=&start=0&limit=30
+线体某一天所有MES工单的看板
+http://172.20.73.16:8080/mes/kb/getLineMesOrderYield?lineCode=PBA&planDate=1550505600000
+
+
+某一天的所有MEs工单 的产量
+http://172.20.73.16:8080/mes/kb/getMesOrderYield?planDate=1550505600000
+
+
+获取某一个工单的产品流水
+http://172.20.73.16:8080/mes/order/getProductFolwViews?mesOrderId=071510200002667701&start=0&limit=50
+
+
+通过扫描条件码，或者 批次号。实现产品追溯
+http://172.20.73.16:8080/mes/order/getProductTrace?qRCode=6A72C7CD4F5440E9BCD12C7F5F46FB1D
+
+
+根据条形码 查找工单
+http://172.20.73.16:8080/mes/order/getMesOrderByQRCode?qRCode=112233
+
+
+质检标准 一级
+http://172.20.73.16:8080/mes/base/getQualityFirst?start=0&limit=30
+http://172.20.73.16:8080/mes/base/addQualityFirst
+http://172.20.73.16:8080/mes/base/updateQualityFirst
+http://172.20.73.16:8080/mes/base/deleteQualityFirst
+
+质检标准 二级
+http://172.20.73.16:8080/mes/base/getQualitySecond?start=0&limit=30&parentId=1
+http://172.20.73.16:8080/mes/base/addQualitySecond
+http://172.20.73.16:8080/mes/base/updateQualitySecond
+http://172.20.73.16:8080/mes/base/deleteQualitySecond
+
+上报质量报告 
+http://172.20.73.16:8080/mes/order/upReportQuality   
+
+站点配置
+新增加载默认方案
+http://172.20.73.16:8080/mes/base/loadDefaultSiteSolution?lineCode=PBA 
+http://172.20.73.16:8080/mes/base/getSiteConfigSolutions?start=0&limit=30&lineCode=PBA
+http://172.20.73.16:8080/mes/base/addSiteConfigSolution
+http://172.20.73.16:8080/mes/base/updateSiteConfigSolution
+http://172.20.73.16:8080/mes/base/deleteSiteConfigSolution?id=
+
+加载MESorder 站点配置方案
+http://172.20.73.16:8080/mes/order/getMesSiteConfigBymesOrderId?mesOrderId=
+http://172.20.73.16:8080/mes/order/addMesSiteConfig
+http://172.20.73.16:8080/mes/order/updateMesSiteConfig
+
+
+
+ 
+
+

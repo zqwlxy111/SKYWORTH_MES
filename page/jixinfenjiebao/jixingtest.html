@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>项目总览</title>
+
+    <!--    iview-css-->
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/iview/iview.css"/>
+
+    <!--    iview-icon-->
+    <link href="https://cdn.bootcss.com/ionicons/4.0.0-2/css/ionicons.css" rel="stylesheet">
+
+    <!--    iview-bootcdn-->
+    <!--    <link rel="stylesheet" href="//unpkg.com/iview/dist/styles/iview.css">-->
+
+    <!--    layui-css-->
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/layui/css/layui.css"/>
+
+    <!--    admin-css-->
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/admin.css?v=312"/>
+
+
+    <style>
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;;
+        }
+
+        ul {
+            display: inline;
+        }
+
+        ul > li {
+            line-height: 24px;
+        }
+
+        #app li > a {
+            /*border: 1px solid #ddd;*/
+            /*background: #edc;*/
+            width: 247px;
+            margin: 10px 0px;
+            padding: 0px 3px;
+            /*border-radius: 3px;*/
+            display: inline-block;
+            font-size: 8px;
+            height: 28px;
+            line-height: 28px;
+        }
+
+        #app li > a:hover {
+            color: #0C0C0C;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 正文开始 -->
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">项目机型分解包设置</div>
+        <div class="layui-card-body">
+            <div class="layui-form toolbar" id="toolbarShow">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目选择：</label>
+                        <div class="layui-input-inline mr0">
+                            <select id="xiangmuxuanze" name="xiangmuxuanze" lay-filter="xiangmuxuanze">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">机型选择：</label>
+                        <div class="layui-input-inline mr0">
+                            <select id="jixingxuanze" name="jixingxuanze" lay-filter="jixingxuanze">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline" style="margin-left: 6px">
+                        <button class="layui-btn icon-btn" lay-filter="formAddTasknodes" lay-submit>
+                            <i class="layui-icon">&#xe6c6;</i>提交保存
+                        </button>
+                    </div>
+                    <div class="layui-inline" style="margin-left: 6px">
+                        <button class="layui-btn icon-btn" lay-filter="formReflash" lay-submit>
+                            <i class="layui-icon">&#xe669;</i>刷新显示
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--            橙色标签线-->
+            <hr class="layui-bg-black">
+
+            <!--            vue-->
+            <div id="app" style="margin-top: 20px" class="layui-hide">
+                <template>
+                    <Row type="flex" justify="space-around" class="code-row-bg">
+                        <i-col span="4" v-for="node in nodes">
+                            <Row>
+                                <i-col span="24">
+                                    <Card>
+                                        <p slot="title" style="font-size: 15px;text-align: center">{{node.name}}</p>
+                                        <p>
+                                        <ul>
+                                            <li v-for="(task,m) in node.nodeTasks">
+                                                <a href="#">
+                                                    <Row>
+                                                        <i-col span="14">
+                                                            <span>{{task.title}}</span>
+                                                        </i-col>
+                                                        <i-col span="10">
+                                                            <i-select size="small" v-model="task.personid"
+                                                                      @click.native="selectedUser(task,$event)"
+                                                                      style="height: 28px;border:0;background-color:#fff;padding-left: 14px">
+                                                                <i-option v-for="person in persons" :value="person.id">
+                                                                    {{person.personname}}
+                                                                </i-option>
+                                                            </i-select>
+                                                        </i-col>
+                                                    </Row>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        </p>
+                                    </Card>
+                                </i-col>
+                            </Row>
+                        </i-col>
+                    </Row>
+                </template>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/jquery-2.2.4.min.js"></script>
+<script src="/SKYWORTH_PMS/iframe/assets/libs/vue/vue.js"></script>
+<!--<script src="//unpkg.com/iview/dist/iview.min.js"></script>-->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/iview/iview.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/common.js?v=312"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/util.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/api.js"></script>
+
+<!--自定义js-->
+<script>
+    var vm;
+    var dutyname;
+    $(function () {
+        vm = new Vue({
+            el: '#app',
+            data: {
+                nodes: null,
+                selectedValue: 0,
+                selectedNode: 1,
+                selectedProject: {},
+                selectedMachine: {},
+                projects: [],
+                machines: [],
+                persons: [],
+            },
+            created: function () {
+                api.project.getList("", function (e) {
+                    vm.projects = e;
+                });
+
+            },
+            methods: {
+                selectedUser: function (task, e) {
+                    task.personid = $(e.target).val();
+                    task.username = $(e.target).find("option:selected").text();
+                    console.log("task.personid === "+task.personid);
+                    console.log("task.username === "+task.username);
+                },
+                saveAll: function () {
+
+                },
+            }
+        })
+    })
+</script>
+<script>
+    layui.use(['layer', 'form', 'table', 'laydate', 'admin', 'index', 'jquery'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        var util = layui.util;
+        var laydate = layui.laydate;
+        var admin = layui.admin;
+        var index = layui.index;
+
+        var projectid = null; // 项目id
+        var machineid = null; // 机型id
+
+        // 项目选择下拉框渲染
+        api.project.getList({}, function (e) {
+            console.log(e);
+            for (var i = 0; i < e.length; i++) {
+                var xiangmuxuanze = $("#xiangmuxuanze");
+                xiangmuxuanze.append("<option value='" + e[i].name + "'>" + e[i].name + "</option>");
+            }
+            form.render();
+        });
+
+        // 机型选择下拉框渲染
+        form.on('select(xiangmuxuanze)', function (data) {
+            vm.person = []; // 清空原来的person里面的数据
+            console.log(data.value); //得到被选中的值
+            var index = $(data.elem).find("option:selected").index() - 1; // 获取选中的项目选择的index索引值
+            api.project.getList({}, function (res) {
+                projectid = res[index].id; // 获取选择项目的id
+                console.log(projectid);
+                api.machine.getListByProject({projectId: projectid}, function (e) { // 根据项目id请求子项目
+                    console.log(e);
+                    var jixingxuanze = $("#jixingxuanze");
+                    jixingxuanze.empty();
+                    jixingxuanze.append("<option value=''>请选择</option>");
+                    for (var i = 0; i < e.length; i++) {
+                        jixingxuanze.append("<option value='" + e[i].machinname + "'>" + e[i].machinname + "</option>");
+                    }
+                    form.render();
+                });
+            });
+        });
+
+        // 机型选择下拉框监听事件
+        form.on('select(jixingxuanze)', function (data) {
+            console.log(data.value); //得到被选中的值
+            var bllId = $(data.elem).find("option:selected").index() - 1; // 机型选择索引值
+            console.log(bllId);
+            api.machine.getListByProject({projectId: projectid}, function (e) { // 根据项目id请求子项目
+                console.log(e);
+                machineid = e[bllId].id; // 获取机型id
+            });
+            // 步骤条显示和隐藏
+            if (data.value) {
+                $("#app").removeClass("layui-hide");
+            } else {
+                $("#app").addClass("layui-hide");
+            }
+            // 获取节点任务清单
+            api.node.getWorkNodes({projecttype: 1,projectid:projectid,machineid:machineid}, function (res) { // projecttype : 项目类别
+                console.log("项目id ==== " + projectid);
+                console.log("机型id ==== " + machineid);
+                console.log(res);
+                vm.nodes = res; // 把节点任务清单赋值到nodes
+                // console.log(vm.fenjiebao);
+            });
+            // 添加persons数据
+            api.project.getPerson({projectid: projectid}, function (persons) {
+                console.log(persons);
+                vm.persons = persons;
+            })
+        });
+
+        // 提交保存事件监听
+        // 定义保存分解包接口
+        var saveMachineDuty = {};
+        saveMachineDuty.dutys = [];
+        form.on('submit(formAddTasknodes)', function (data) {
+
+            console.log(data.field);
+
+            var dutys = vm.nodes.reduce(function (x, y) {
+                return { nodeTasks: x.nodeTasks.concat(y.nodeTasks) };
+            }).nodeTasks.map(function (x) {
+                return { duty: x.id, dutyname: x.title, personid: x.personid, projectid: projectid, machineid: machineid };
+            });
+
+            api.project.setMachineDuty({dutys: dutys, projectid: projectid, machineid: machineid }, function (e) {
+                if (e) {
+                    layer.msg('保存成功', {
+                        time: 550
+                    })
+                }else {
+                    layer.msg('保存失败', {
+                        time: 1000
+                    })
+                }
+            })
+
+            console.log(dutys);
+            return false;
+        });
+
+        // 刷新显示事件监听
+        form.on('submit(formReflash)', function (data) {
+
+            console.log(data.field);
+            alert("asd");
+            console.log(vm.item1.name);
+            return false;
+        });
+    });
+</script>
+
+</body>
+
+</html>

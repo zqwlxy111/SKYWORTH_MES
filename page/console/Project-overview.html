@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>项目总览</title>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/admin.css?v=312"/>
+    <style>
+        .layui-form-label{
+            padding: 9px 5px;
+        }
+        /*.layui-inline{*/
+        /*   margin-right: 16px;*/
+        /*}*/
+        .layui-form-item .layui-input-inline{
+            width: 110px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 正文开始 -->
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <div class="layui-inline layui-col-lg10 layui-col-md10 layui-col-sm10 layui-col-xs10" style="margin-right: 0px">项目查询</div>
+            <div class="layui-inline layui-col-lg2  layui-col-md2 layui-col-sm2 layui-col-xs2 text-right" style="margin-right: 0px">
+                <button class="layui-btn layui-btn-sm " lay-event="add" id="chaxunanniu"><i class="layui-icon layui-icon-add-1"></i>新建查询</button>
+            </div>
+        </div>
+        <div class="layui-card-body">
+            <div class="layui-form toolbar layui-hide" id="toolbarShow">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目类别：</label>
+                        <div class="layui-input-inline mr0">
+                            <select name="xiangmulb">-->
+                                <option value=""></option>
+                                <option value="待立项审核">all</option>
+                                <option value="已完成">内销项目</option>
+                                <option value="未完成">外销项目</option>
+                                <option value="异常">B2B项目</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目名称：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmumc" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目组长：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmuzz" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目负责人：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmufzr" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">立项时间：</label>
+                        <div class="layui-input-inline mr0" style="width: 175px;">
+                            <input type="text" class="layui-input" id="lixiangTime" placeholder="选择范围时间">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目状态：</label>
+                        <div class="layui-input-inline mr0">
+                            <select name="xiangmuzt">
+                                <option value=""></option>
+                                <option value="待立项审核">待立项审核</option>
+                                <option value="已完成">已完成</option>
+                                <option value="未完成">未完成</option>
+                                <option value="异常">异常</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn icon-btn" lay-filter="formSubSearchUser" lay-submit>
+                            <i class="layui-icon">&#xe615;</i>搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+<!--            橙色标签线-->
+            <hr class="layui-bg-orange">
+            <table class="layui-table" id="projectOverview" lay-filter="projectOverview"></table>
+        </div>
+    </div>
+
+<!--    产品子项目 内销、B2B-->
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <div class="layui-inline layui-col-lg10 layui-col-md10 layui-col-sm10 layui-col-xs10" style="margin-right: 0px">产品子项目 -- 内销、B2B</div>
+            <div class="layui-inline layui-col-lg2  layui-col-md2 layui-col-sm2 layui-col-xs2 text-right" style="margin-right: 0px">
+                <button class="layui-btn layui-btn-sm " lay-event="add" id="chaxunanniu2"><i class="layui-icon layui-icon-add-1"></i>新建查询</button>
+            </div>
+        </div>
+        <div class="layui-card-body">
+            <div class="layui-form toolbar layui-hide" id="toolbarShow2">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目类别：</label>
+                        <div class="layui-input-inline mr0">
+                            <select name="xiangmulb">-->
+                                <option value=""></option>
+                                <option value="待立项审核">all</option>
+                                <option value="已完成">内销项目</option>
+                                <option value="未完成">外销项目</option>
+                                <option value="异常">B2B项目</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目名称：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmumc" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目组长：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmuzz" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目负责人：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmufzr" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">立项时间：</label>
+                        <div class="layui-input-inline mr0" style="width: 175px;">
+                            <input type="text" class="layui-input" id="lixiangTime2" placeholder="选择范围时间">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目状态：</label>
+                        <div class="layui-input-inline mr0">
+                            <select name="xiangmuzt">
+                                <option value=""></option>
+                                <option value="待立项审核">待立项审核</option>
+                                <option value="已完成">已完成</option>
+                                <option value="未完成">未完成</option>
+                                <option value="异常">异常</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn icon-btn" lay-filter="formSubSearchUser" lay-submit>
+                            <i class="layui-icon">&#xe615;</i>搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--            橙色标签线-->
+            <hr class="layui-bg-orange">
+            <table class="layui-table" id="projectOverview2" lay-filter="projectOverview"></table>
+        </div>
+    </div>
+<!--    产品子项目 外销-->
+    <div class="layui-card">
+        <div class="layui-card-header">
+            <div class="layui-inline layui-col-lg10 layui-col-md10 layui-col-sm10 layui-col-xs10" style="margin-right: 0px">产品子项目 -- 外销</div>
+            <div class="layui-inline layui-col-lg2  layui-col-md2 layui-col-sm2 layui-col-xs2 text-right" style="margin-right: 0px">
+                <button class="layui-btn layui-btn-sm " lay-event="add" id="chaxunanniu3"><i class="layui-icon layui-icon-add-1"></i>新建查询</button>
+            </div>
+        </div>
+        <div class="layui-card-body">
+            <div class="layui-form toolbar layui-hide" id="toolbarShow3">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目类别：</label>
+                        <div class="layui-input-inline mr0">
+                            <select name="xiangmulb">-->
+                                <option value=""></option>
+                                <option value="待立项审核">all</option>
+                                <option value="已完成">内销项目</option>
+                                <option value="未完成">外销项目</option>
+                                <option value="异常">B2B项目</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目名称：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmumc" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目组长：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmuzz" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目负责人：</label>
+                        <div class="layui-input-inline mr0">
+                            <input name="xiangmufzr" class="layui-input" type="text" placeholder="项目名称"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">立项时间：</label>
+                        <div class="layui-input-inline mr0" style="width: 175px;">
+                            <input type="text" class="layui-input" id="lixiangTime3" placeholder="选择范围时间">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目状态：</label>
+                        <div class="layui-input-inline mr0">
+                            <select name="xiangmuzt">
+                                <option value=""></option>
+                                <option value="待立项审核">待立项审核</option>
+                                <option value="已完成">已完成</option>
+                                <option value="未完成">未完成</option>
+                                <option value="异常">异常</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button class="layui-btn icon-btn" lay-filter="formSubSearchUser" lay-submit>
+                            <i class="layui-icon">&#xe615;</i>搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!--            橙色标签线-->
+            <hr class="layui-bg-orange">
+            <table class="layui-table" id="projectOverview3" lay-filter="projectOverview"></table>
+        </div>
+    </div>
+</div>
+
+<!--            头部工具栏新增删除按钮-->
+<script type="text/html" id="toolbarDemo">
+    <div class="layui-btn-container">
+        <button class="layui-btn layui-btn-sm layui-btn-radius" lay-event="add"><i class="layui-icon layui-icon-add-1"></i>新增</button>
+        <button class="layui-btn layui-btn-sm layui-btn-radius" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</button>
+    </div>
+</script>
+
+<!--            单元表格内部的编辑删除-->
+<script type="text/html" id="barDemo1">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+
+<!--            甘特图表格内部查看按钮-->
+<script type="text/html" id="barDemo2">
+    <a class="layui-btn layui-btn-xs" lay-event="chakan">点击按钮查看</a>
+</script>
+
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/common.js?v=312"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/util.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/api.js"></script>
+
+<!--自定义js-->
+<script>
+    layui.use(['layer', 'form', 'table',  'laydate','admin','index','jquery'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        // var util = layui.util;
+        var laydate = layui.laydate;
+        var admin = layui.admin;
+        var index = layui.index;
+
+
+        api.machine.getListByProject({projectId: 7},function (e) {
+            console.log(e);
+        });
+
+        /**
+         *  查询按钮事件
+         */
+        var openstatus = false; // 设置默认状态为关闭
+        $("#chaxunanniu").on("click",function () {
+           if (!openstatus){
+               $("#toolbarShow").removeClass("layui-hide");
+               $("#toolbarShow").addClass("layui-show");
+               openstatus = true;
+           } else{
+               $("#toolbarShow").removeClass("layui-show");
+               $("#toolbarShow").addClass("layui-hide");
+               openstatus = false;
+           }
+        });
+
+        /**
+         * 范围时间选择
+         */
+        laydate.render({
+            elem: '#lixiangTime'
+            ,range: true
+        });
+
+        /**
+         * table渲染
+         */
+
+        //项目总览
+        window.tbdata = null;
+        api.project.getList({},function (e) {
+            for (var i = 0; i < e.length; i++) {
+                e[i].type = util.getProType(e[i].type);
+                // console.log(e[i].type);
+                e[i].createtime = formatDate(new Date(e[i].createtime)); //就得到普通的时间了
+            }
+            console.log(e);
+            tbdata = e;
+            table.render({
+                elem: '#projectOverview',
+                data:tbdata,
+                page: true,
+                cellMinWidth: 100,
+                toolbar: '#toolbarDemo',
+                // parseData: function(e){ //res 即为原始返回的数据
+                //     return {
+                //         "msg": e.msg, //解析提示文本
+                //         "data": e.result //解析数据列表
+                //     };
+                // },
+                // response: {
+                //     statusCode: 1 //规定成功的状态码，默认：0
+                //     ,dataName: 'result' //规定数据列表的字段名称，默认：data
+                // },
+                cols: [[
+                    {type:'radio'},
+                    {type: 'numbers', title: '#' ,align:"center"},
+                    {field: 'type', sort: true, title: '项目类别' ,align:"center"},
+                    {field: 'name', title: '项目名称' ,align:"center"},
+                    {field: 'personname', title: '项目组长' ,align:"center"},
+                    {field: 'leadername', title: '项目负责人' ,align:"center"},
+                    {field: 'createtime', sort: true, title: '项目立项时间' ,align:"center"},
+                    {field: 'state', sort: true, title: '项目状态' ,align:"center"},
+                    {field: 'sex', title: '产品立项书' ,toolbar: '#barDemo2',align:"center"},
+                    {field: 'sex', title: '甘特图' ,toolbar: '#barDemo2',align:"center"},
+                    {field: 'right', title:'操作', toolbar: '#barDemo1', width:150,align:"center"}
+                ]]
+            });
+        });
+
+        // 项目子项目 -- 内销、B2B
+        window.tbdata = null;
+        api.project.getList({},function (e) {
+            for (var i = 0; i < e.length; i++) {
+                e[i].type = util.getProType(e[i].type);
+                e[i].createtime = formatDate(new Date(e[i].createtime)); //就得到普通的时间了
+                // console.log(e[i].type);
+            }
+            tbdata = e;
+            table.render({
+                elem: '#projectOverview2',
+                data:tbdata,
+                page: true,
+                cellMinWidth: 100,
+                toolbar: '#toolbarDemo',
+                // parseData: function(e){ //res 即为原始返回的数据
+                //     return {
+                //         "msg": e.msg, //解析提示文本
+                //         "data": e.result //解析数据列表
+                //     };
+                // },
+                // response: {
+                //     statusCode: 1 //规定成功的状态码，默认：0
+                //     ,dataName: 'result' //规定数据列表的字段名称，默认：data
+                // },
+                cols: [[
+                    {type:'radio'},
+                    {type: 'numbers', title: '#' ,align:"center"},
+                    {field: 'type', sort: true, title: '项目类别' ,align:"center"},
+                    {field: 'name', title: '机型' ,align:"center"},
+                    {field: 'personname', title: '机芯' ,align:"center"},
+                    {field: 'leadername', title: '原型机' ,align:"center"},
+                    {field: 'createtime', sort: true, title: '配屏' ,align:"center"},
+                    {field: 'state', sort: true, title: '机型审核状态' ,align:"center"},
+                    {field: 'state', sort: true, title: '审核结果' ,align:"center"},
+                    {field: 'state', sort: true, title: '当前阶段' ,align:"center"},
+                    {field: 'state', sort: true, title: '项目完成率' ,align:"center"}
+                    // ,
+                    // {field: 'sex', title: '产品立项书' ,toolbar: '#barDemo2',align:"center"},
+                    // {field: 'sex', title: '甘特图' ,toolbar: '#barDemo2',align:"center"},
+                    // {field: 'right', title:'操作', toolbar: '#barDemo1', width:150,align:"center"}
+                ]]
+            });
+        });
+        // 子项目 -- 外销
+        window.tbdata = null;
+        api.project.getList({},function (e) {
+            for (var i = 0; i < e.length; i++) {
+                e[i].type = util.getProType(e[i].type);
+                e[i].createtime = formatDate(new Date(e[i].createtime)); //就得到普通的时间了
+                // console.log(e[i].type);
+            }
+            tbdata = e;
+            table.render({
+                elem: '#projectOverview3',
+                data:tbdata,
+                page: true,
+                cellMinWidth: 100,
+                toolbar: '#toolbarDemo',
+                // parseData: function(e){ //res 即为原始返回的数据
+                //     return {
+                //         "msg": e.msg, //解析提示文本
+                //         "data": e.result //解析数据列表
+                //     };
+                // },
+                // response: {
+                //     statusCode: 1 //规定成功的状态码，默认：0
+                //     ,dataName: 'result' //规定数据列表的字段名称，默认：data
+                // },
+                cols: [[
+                    {type:'radio'},
+                    {type: 'numbers', title: '#' ,align:"center"},
+                    {field: 'type', sort: true, title: '项目类别' ,align:"center"},
+                    {field: 'name', title: '机型' ,align:"center"},
+                    {field: 'personname', title: '机芯' ,align:"center"},
+                    {field: 'leadername', title: '原型机' ,align:"center"},
+                    {field: 'createtime', title: '配屏' ,align:"center"},
+                    {field: 'state', title: '产品定位' ,align:"center"},
+                    {field: 'state', title: '机型审核状态' ,align:"center"},
+                    {field: 'state', title: '审核结果' ,align:"center"},
+                    {field: 'state', title: '当前阶段' ,align:"center"},
+                    {field: 'state', title: '项目完成率' ,align:"center"},
+                    {field: 'state', title: '方案系统' ,align:"center"},
+                    {field: 'state', title: 'S评审' ,align:"center"},
+                    {field: 'state', title: 'ES闭环' ,align:"center"},
+                    {field: 'state', title: 'NPR试产' ,align:"center"},
+                    {field: 'state', title: 'NPR评审' ,align:"center"},
+                    {field: 'state', title: 'NPR闭环' ,align:"center"},
+                    {field: 'state', title: 'PID号' ,align:"center"},
+                    {field: 'state', title: 'PID评审' ,align:"center"},
+                    {field: 'state', title: '工艺确认' ,align:"center"},
+                    {field: 'state', title: '设计师(电子)' ,align:"center",width:"8%"},
+                    {field: 'state', title: '设计师(结构)' ,align:"center",width:"8%"},
+                    {field: 'state', title: '设计师(电源)' ,align:"center",width:"8%"},
+                    {field: 'state', title: '设计师(软件)' ,align:"center",width:"8%"},
+                    {field: 'state', title: '设计师(模组)' ,align:"center",width:"8%"},
+                    {field: 'state', title: 'PMP试产订单号' ,align:"center"},
+                    {field: 'state', title: '对应PO' ,align:"center"},
+                    {field: 'state', title: '试产进度' ,align:"center"},
+                    {field: 'state', title: 'MP量产' ,align:"center"},
+                    {field: 'state', title: '计划出货时间' ,align:"center",width:"10%"},
+                    {field: 'state', title: '实际出货时间' ,align:"center",width:"10%"}
+                    // ,
+                    // {field: 'sex', title: '产品立项书' ,toolbar: '#barDemo2',align:"center"},
+                    // {field: 'sex', title: '甘特图' ,toolbar: '#barDemo2',align:"center"},
+                    // {field: 'right', title:'操作', toolbar: '#barDemo1', width:150,align:"center"}
+                ]]
+            });
+        });
+
+        /**
+         * 头工具栏事件
+         */
+        table.on('toolbar(projectOverview)', function(obj){
+            var checkStatus = table.checkStatus(obj.config.id);
+            switch(obj.event){
+                case 'add':
+                    var data = checkStatus.data;
+                    // layer.alert(JSON.stringify(data));
+                    index.openTab({
+                        title: '新增产品项目立项',
+                        url: '/SKYWORTH_PMS/iframe/page/New-product-items/addPin-all.html',
+                        end: function() {
+                            //  do something
+                            // table.reload('userTable');
+                        }
+                    });
+                    break;
+                case 'del':
+                    console.log(table.checkStatus("projectOverview"));
+                    console.log(checkStatus);
+                    layer.confirm('确认删除所选项目吗？', function(index){
+
+                        layer.close(index);
+                    });
+                    // var data = checkStatus.data;
+                    // layer.msg('选中了：'+ data.length + ' 个');
+                    break;
+                case 'isAll':
+                    layer.msg(checkStatus.isAll ? '全选': '未全选');
+                    break;
+            }
+        });
+
+        /**
+         * 监听行工具事件
+         */
+        table.on('tool(projectOverview)', function(obj){
+            var data = obj.data;
+            console.log(obj);
+            if(obj.event === 'del'){
+                layer.confirm('真的删除该项目么？', function(index){
+                    obj.del();
+                    layer.close(index);
+                });
+            } else if(obj.event === 'edit'){
+                layer.prompt({
+                    formType: 2
+                    ,value: data.email
+                }, function(value, index){
+                    obj.update({
+                        email: value
+                    });
+                    layer.close(index);
+                });
+            } else if (obj.event === 'chakan') {
+                console.log("asdaasdasd");
+            }
+        });
+
+    });
+</script>
+</body>
+
+</html>

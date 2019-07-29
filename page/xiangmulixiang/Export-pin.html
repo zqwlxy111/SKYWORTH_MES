@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>外销项目立项</title>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/admin.css?v=312"/>
+    <style>
+        #export-pin .layui-form-item {
+            margin-bottom: 0;
+            margin-top: 20px;
+        }
+
+        #export-pin .layui-form-item .layui-inline {
+            margin-bottom: 25px;
+            margin-right: 0;
+        }
+
+        .form-group-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, .05);
+        }
+
+        .layui-form-item .layui-form-checkbox[lay-skin=primary]{
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 加载动画 -->
+<!--<div class="page-loading">-->
+<!--    <div class="ball-loader">-->
+<!--        <span></span><span></span><span></span><span></span>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- 正文开始 -->
+<form class="layui-form" lay-filter="Export-pin" id="export-pin">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+
+        <!--        项目名称和项目定位-->
+        <div class="layui-card">
+            <div class="layui-card-header">外销项目立项
+            <div class="layui-btn layui-btn-danger" id="asdasd">adasd</div>
+            </div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">项目名称 :</label>
+                        <div class="layui-input-block">
+                            <input name="name" type="text" placeholder="请输入项目名称" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">项目类型 :</label>
+                        <div class="layui-input-block">
+                            <input name="type" type="text" class="layui-input layui-disabled"
+                                   lay-verType="tips" lay-verify="required" disabled required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">产品定位 :</label>
+                        <div class="layui-input-block">
+                            <select name="position" lay-filter="productCategoryChoice" lay-verType="tips" lay-verify="required">
+                                <option value=""></option>
+                                <option value="高端产品">高端产品</option>
+                                <option value="中端产品">中端产品</option>
+                                <option value="低端产品">低端产品</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        新内容描述-->
+        <div class="layui-card">
+            <div class="layui-card-header">新内容描述</div>
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">新功能 :</label>
+                        <div class="layui-input-block">
+                            <input name="newfunc" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">新工艺 :</label>
+                        <div class="layui-input-block">
+                            <input name="newtech" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">新材料 :</label>
+                        <div class="layui-input-block">
+                            <input name="newmate" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        功能描述和要求-->
+        <div class="layui-card">
+            <div class="layui-card-header">功能描述和要求</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">功能描述和要求 :</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" class="layui-textarea" name="describe"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        产品进度计划-->
+        <div class="layui-card">
+            <div class="layui-card-header">产品进度计划</div>
+            <div class="layui-card-body">
+                <!--                增加删除按钮-->
+                <div class="layui-col-md12 "  style="margin-bottom: 20px; margin-top: 10px ">
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-sm" id="libinglin-btn-productPlanning"><i class="layui-icon layui-icon-add-1"></i>添加 </button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-sm"><i class="layui-icon layui-icon-delete"></i>删除 </button>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <table id="productPlan" lay-filter="productPlan"></table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        项目达成目标设定-->
+        <div class="layui-card">
+            <div class="layui-card-header">项目达成目标设定</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">进度目标 :</label>
+                        <div class="layui-input-block">
+                            <input name="jdmb" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">质量目标 :</label>
+                        <div class="layui-input-block">
+                            <input name="zlmb" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">效率目标 :</label>
+                        <div class="layui-input-block">
+                            <input name="xlmb" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        项目主要领导-->
+        <div class="layui-card">
+            <div class="layui-card-header">项目总成员分配</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">项目组长 :</label>
+                        <div class="layui-input-block">
+                            <input name="personname" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required id="libinglin"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">项目负责人 :</label>
+                        <div class="layui-input-block">
+                            <input name="leadername" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required id="libinglin1"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        项目模块主要成员-->
+        <div class="layui-card">
+            <div class="layui-card-header">项目各模块主要成员分配</div>
+            <div class="layui-card-body">
+                <div class="layui-col-md12" style="margin-bottom: 20px; margin-top: 10px ">
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-sm" id="libinglin-btn-departmentPeople"><i class="layui-icon layui-icon-add-1"></i>添加 </button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-sm"><i class="layui-icon layui-icon-delete"></i>删除 </button>
+                </div>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">业务模块</legend>
+                    <table id="tb1" lay-filter="tb1"></table>
+                </fieldset>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">计划模块</legend>
+                    <table id="tb2" lay-filter="tb2"></table>
+
+                </fieldset>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">质量模块</legend>
+                    <table id="tb3" lay-filter="tb3"></table>
+
+                </fieldset>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">工程模块</legend>
+                    <table id="tb4" lay-filter="tb4"></table>
+
+                </fieldset>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">生产模块</legend>
+                    <table id="tb5" lay-filter="tb5"></table>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group-bottom text-right" style="margin: 0 auto; width: 96%;">
+        <button type="reset" class="layui-btn layui-btn-primary">&emsp;重置&emsp;</button>
+        <button class="layui-btn" lay-filter="formSubmitAdv2" lay-submit>&emsp;保存&emsp;</button>
+        <button class="layui-btn" lay-filter="formSubmitAdv3" lay-submit>&emsp;上传&emsp;</button>
+        <button class="layui-btn" lay-filter="formSubmitAdv4" lay-submit>&emsp;导出&emsp;</button>
+        <button class="layui-btn" lay-filter="exportsubmit" lay-submit>&emsp;提交&emsp;</button>
+    </div>
+
+</form>
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/common.js?v=312"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/util.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/api.js"></script>
+
+<script>
+    layui.use(['layer', 'form', 'jquery','table', 'util', 'laydate','admin'], function () {
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        var util = layui.util;
+        var laydate = layui.laydate;
+        var admin = layui.admin;
+        parent.$ = layui.jquery;
+
+        var nums = Math.floor(Math.random()*1000+12);
+        $("#asdasd").on("click",function () {
+            $("input").val(nums);
+        });
+
+        // 表单初始赋值
+        form.val('Export-pin', {
+            "type": "外销产品"
+        });
+
+        // 产品进度计划表格
+        var productPlanEle = table.render({
+            elem: '#productPlan',
+            data: [],
+            page: false,
+            cellMinWidth: 100,
+            cols: [[
+                {type: 'checkbox', width:'2%',title: '#'},
+                {type: 'numbers', width:'2%',title: '#'},
+                {field: 'machinetype', title: '产品类型',width:'6%',align:'center'},
+                {field: 'parentname', title: '原型机' ,width:'10%',align:'center'},
+                {field: 'machinname', title: '机型' ,width:'9%',align:'center'},
+                {field: 'inner', title: '机芯',width:'9%',align:'center' },
+                {field: 'evt', title: 'EVT',width:'9%',align:'center' },
+                {field: 'dvt', title: 'DVT',width:'9%',align:'center' },
+                {field: 'pvt', title: 'PVT',width:'9%',align:'center' },
+                {field: 'pmp', title: 'PMP',width:'9%',align:'center' },
+                {field: 'mp', title: 'MP',width:'9%',align:'center' },
+                {field: 'diff', title: '派生差异',width:'9%',align:'center' },
+                {field: 'remark', title: '备注',width:'9%',align:'center' }
+            ]]
+        });
+
+        // table.on('rowDouble(productPlan)', function(obj){
+        //     console.log(obj.tr); //得到当前行元素对象
+        //     console.log(obj.data); //得到当前行数据
+        //     console.log(obj);
+        //     obj.del(); //删除当前行
+        //     //obj.update(fields) //修改当前行数据
+        // });
+
+        // 产品计划弹出层
+        window.machinesobb = [];
+        window.machinesobjx = [];
+        $("#libinglin-btn-productPlanning").click(function () {
+            admin.open({
+                type: 2, //此处以iframe举例
+                title: '添加产品计划',
+                area: ['780px', '770px'],
+                shade: 0.8,
+                maxmin: false,
+                anim: 0,
+                closeBtn: 1,
+                offset: 'auto',
+                //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                content: getProjectUrl() + 'page/add/addModel.html',
+                success: function (layero,dIndex) {
+                    var body = layer.getChildFrame('body', dIndex); // 获取弹出层iframe层的对象
+
+                },
+                cancel: function (index, layero) {
+                    // if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
+                    //     layer.close(index);
+                    // }
+                    // return false;
+                },
+                end:function () {
+                    productPlanEle.reload({data: window.machinesobjx});
+                    console.log(window.machinesobb);
+                }
+            });
+        });
+
+        // 添加组长和负责人点击框事件
+        /*
+        * person是组长 leader是负责人
+        * */
+        window.personname = null;
+        window.leadername = null;
+        window.person = null;
+        window.groupleader = null;
+        $('#libinglin,#libinglin1').on("mouseover",function () {
+            $(this).css("cursor","pointer");
+        });
+        $('#libinglin').on("click",function () {
+            admin.open({
+                type: 2, //此处以iframe举例
+                title: '项目总成员分配',
+                area: ['860px', '695px'],
+                shade: 0.8,
+                maxmin: false,
+                anim: 0,
+                closeBtn: 1,
+                offset: 'auto',
+                //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                content: getProjectUrl() + 'page/add/add-xmzz.html',
+                end:function () {
+                    console.log(window.person);
+                    $('#libinglin').val(personname);
+                }
+            });
+        });
+        $('#libinglin1').on("click",function () {
+            admin.open({
+                type: 2, //此处以iframe举例
+                title: '项目总成员分配',
+                area: ['860px', '695px'],
+                shade: 0.8,
+                maxmin: false,
+                anim: 0,
+                closeBtn: 1,
+                offset: 'auto',
+                //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                content: getProjectUrl() + 'page/add/add-xmfzr.html',
+                end:function () {
+                    console.log(window.person);
+                    $('#libinglin1').val(leadername);
+                }
+            });
+        });
+
+        // 各个模块人员职责分配
+        var insTb1 = table.render({
+            elem: '#tb1',
+            data: [],
+            page: false,
+            cellMinWidth: 100,
+            cols: [[
+                {type: 'checkbox', title: '#',width:'3%'},
+                {type: 'numbers', title: '#',width:'3%'},
+                {field: 'mokuai', title: '模块',width:'10%',align:'center'},
+                {field: 'bumen', title: '部门' ,width:'10%',align:'center'},
+                {field: 'gonghao', title: '工号' ,width:'13%',align:'center'},
+                {field: 'renyuan', title: '人员' ,width:'12%',align:'center'},
+                {field: 'zhize', title: '职责',width:'49.2%',align:'center' }
+            ]]
+        });
+        var insTb2 = table.render({
+            elem: '#tb2',
+            data: [],
+            page: false,
+            cellMinWidth: 100,
+            cols: [[
+                {type: 'checkbox', title: '#',width:'3%'},
+                {type: 'numbers', title: '#',width:'3%'},
+                {field: 'mokuai', title: '模块',width:'10%',align:'center'},
+                {field: 'bumen', title: '部门' ,width:'10%',align:'center'},
+                {field: 'gonghao', title: '工号' ,width:'13%',align:'center'},
+                {field: 'renyuan', title: '人员' ,width:'12%',align:'center'},
+                {field: 'zhize', title: '职责',width:'49.2%',align:'center' }
+            ]]
+        });
+        var insTb3 = table.render({
+            elem: '#tb3',
+            data: [],
+            page: false,
+            cellMinWidth: 100,
+            cols: [[
+                {type: 'checkbox', title: '#',width:'3%'},
+                {type: 'numbers', title: '#',width:'3%'},
+                {field: 'mokuai', title: '模块',width:'10%',align:'center'},
+                {field: 'bumen', title: '部门' ,width:'10%',align:'center'},
+                {field: 'gonghao', title: '工号' ,width:'13%',align:'center'},
+                {field: 'renyuan', title: '人员' ,width:'12%',align:'center'},
+                {field: 'zhize', title: '职责',width:'49.2%',align:'center' }
+            ]]
+        });
+        var insTb4 = table.render({
+            elem: '#tb4',
+            data: [],
+            page: false,
+            cellMinWidth: 100,
+            cols: [[
+                {type: 'checkbox', title: '#',width:'3%'},
+                {type: 'numbers', title: '#',width:'3%'},
+                {field: 'mokuai', title: '模块',width:'10%',align:'center'},
+                {field: 'bumen', title: '部门' ,width:'10%',align:'center'},
+                {field: 'gonghao', title: '工号' ,width:'13%',align:'center'},
+                {field: 'renyuan', title: '人员' ,width:'12%',align:'center'},
+                {field: 'zhize', title: '职责',width:'49.2%',align:'center' }
+            ]]
+        });
+        var insTb5 = table.render({
+            elem: '#tb5',
+            data: [],
+            page: false,
+            cellMinWidth: 100,
+            cols: [[
+                {type: 'checkbox', title: '#',width:'3%'},
+                {type: 'numbers', title: '#',width:'3%'},
+                {field: 'mokuai', title: '模块',width:'10%',align:'center'},
+                {field: 'bumen', title: '部门' ,width:'10%',align:'center'},
+                {field: 'gonghao', title: '工号' ,width:'13%',align:'center'},
+                {field: 'renyuan', title: '人员' ,width:'12%',align:'center'},
+                {field: 'zhize', title: '职责',width:'49.2%',align:'center' }
+            ]]
+        });
+        // 定义五个外销list
+        window.wlist1 = [];
+        window.wlist2 = [];
+        window.wlist3 = [];
+        window.wlist4 = [];
+        window.wlist5 = [];
+        // 定义数组对象接收
+        window.persons = [];
+        $("#libinglin-btn-departmentPeople").click(function () {
+            admin.open({
+                type: 2, //此处以iframe举例
+                title: '添加项目模块人员',
+                area: ['860px', '695px'],
+                shade: 0.8,
+                maxmin: false,
+                anim: 0,
+                closeBtn: 1,
+                offset: 'auto',
+                //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                content: getProjectUrl() + 'page/add/addPeople-model.html',
+
+                success: function (layero,dIndex) {
+                    var body = layer.getChildFrame('body', dIndex); // 获取弹出层iframe层的对象
+                },
+                cancel: function (index, layero) {
+                    // if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
+                    //     layer.close(index);
+                    // }
+                    // return false;
+                },
+                end:function () {
+                    if (window.wmokuai == "业务模块") {
+                        insTb1.reload({data: window.wlist1})
+                    }else if (window.wmokuai == "计划模块") {
+                        insTb2.reload({data: window.wlist2})
+                    }else if (window.wmokuai == "质量模块") {
+                        insTb3.reload({data: window.wlist3})
+                    }else if (window.wmokuai == "工程模块") {
+                        insTb4.reload({data: window.wlist4})
+                    }else if (window.wmokuai == "生产模块") {
+                        insTb5.reload({data: window.wlist5})
+                    }
+                    console.log(window.persons);
+                }
+            });
+        });
+
+        // 定义一个后端传送的接口对象
+        var hdata = {};
+
+        // 表单提交监听事件
+        form.on('submit(exportsubmit)', function (data) {
+            console.log( typeof data.field);
+            console.log( data.field);
+            // 项目产品定位
+            if (data.field.position == '高端产品') {
+                hdata.position = 3;
+            }else if (data.field.position == '中端产品') {
+                hdata.position = 2;
+            }else{
+                hdata.position = 1;
+            }
+            hdata.type = 2; // 项目类型
+            hdata.describe = data.field.describe; // 描述
+            hdata.groupleader = window.groupleader; // 负责人id
+            hdata.person = window.person; // 组长id
+            hdata.jdmb = data.field.jdmb; // 进度目标
+            hdata.xlmb = data.field.xlmb; // 效率目标
+            hdata.zlmb = data.field.zlmb; // 质量目标
+            hdata.leadername = data.field.leadername; // 负责人姓名
+            hdata.personname = data.field.personname; // 组长姓名
+            hdata.name = data.field.name; // 项目名称
+            hdata.newfunc = data.field.newfunc; // 新功能
+            hdata.newmate = data.field.newmate; // 新工艺
+            hdata.newtech = data.field.newtech; // 新材料
+            hdata.machines = window.machinesobb; // 产品计划数组
+            hdata.persons = window.persons; // 模块人员接口
+            $.each(hdata,function (i,n) {
+                console.log(i+":"+n);
+            });
+            console.log(hdata);
+            // 此处的e为返回的接口数据msg.result 为成功的状态值 1 = 成功；
+            api.project.addProject(hdata,function (e) {
+                console.log(e);
+                if (e == 1) {
+                    layer.msg("提交成功",{time:1500});
+                }else{
+                    layer.msg("提交失败",{time:1500});
+                }
+            });
+            console.log(data);
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>

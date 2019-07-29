@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>项目总览</title>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/admin.css?v=312"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/steps/style.css">
+    <style>
+        #step_demo {
+            padding-top: 15px;
+        }
+
+        .layui-timeline {
+            width: 66%;
+            /*border: 1px solid red;*/
+            margin: 26px 0 0 16px;
+        }
+
+        .layui-timeline-item {
+            padding-right: 15px;
+            margin-bottom: 35px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 正文开始 -->
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">项目机型分解包查询</div>
+        <div class="layui-card-body">
+            <div class="layui-form toolbar" id="toolbarShow">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目选择：</label>
+                        <div class="layui-input-inline mr0">
+                            <select id="xiangmuxuanze" name="xiangmuxuanze" lay-filter="xiangmuxuanze"
+                                    lay-verType="tips" lay-verify="required">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">机型选择：</label>
+                        <div class="layui-input-inline mr0">
+                            <select id="jixingxuanze" name="jixingxuanze" lay-filter="jixingxuanze"
+                                    lay-verType="tips" lay-verify="required">
+                                <option value="">请选择</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline" style="margin-left: 6px">
+                        <button class="layui-btn icon-btn" lay-filter="formSubSearchMachine" lay-submit>
+                            <i class="layui-icon">&#xe615;</i>搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!--            橙色标签线-->
+            <hr class="layui-bg-green">
+
+            <!--            步骤条    -->
+            <div id="step_demo" class="step-body layui-col-md12 layui-show">
+                <div class="step-header" style="width:99%;">
+                    <ul id="step-bl"></ul>
+                </div>
+            </div>
+            <!--            <button id="preBtn">上一步</button>-->
+            <!--            <button id="nextBtn">下一步</button>-->
+            <button id="goBtn" style="visibility: hidden">跳转的指定的步骤</button>
+        </div>
+    </div>
+    <div class="layui-form">
+        <div class="layui-form-item">
+            <ul class="layui-timeline">
+                <li class="layui-timeline-item">
+                    <i class="layui-icon layui-timeline-axis"></i>
+                    <div class="layui-timeline-content layui-text">
+                        <div class="layui-timeline-title">
+                            <div class="layui-col-lg3">2017年，layui 里程碑版本 2.0 发布</div>
+                            <div class="layui-col-lg3" style="margin-top: -8px ">
+                                <div class="layui-input-inline">
+                                    <select id="fenjiebaojiedian1" name="fenjiebaojiedian" lay-filter="fenjiebaojiedian"
+                                            lay-verType="tips" lay-verify="required">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/common.js?v=312"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/util.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/api.js"></script>
+
+<!--自定义js-->
+<script>
+    layui.use(['layer', 'form', 'table', 'laydate', 'admin', 'index', 'jquery', 'steps'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        var util = layui.util;
+        var laydate = layui.laydate;
+        var admin = layui.admin;
+        var index = layui.index;
+
+        // 项目选择下拉框渲染
+        api.project.getList({}, function (e) {
+            console.log(e);
+            for (var i = 0; i < e.length; i++) {
+                var xiangmuxuanze = $("#xiangmuxuanze");
+                xiangmuxuanze.append("<option value='" + e[i].name + "'>" + e[i].name + "</option>");
+            }
+            form.render();
+        });
+
+        // 机型选择下拉框渲染
+        var blId = null; // 项目选择索引值 -- 给submit用
+        form.on('select(xiangmuxuanze)', function (data) {
+            console.log(data.value); //得到被选中的值
+            var index = $(data.elem).find("option:selected").index() - 1; // 获取选中的项目选择的index索引值
+            api.project.getList({}, function (res) {
+                var projectId = res[index].id; // 获取选择项目的id
+                blId = projectId;
+                console.log(projectId);
+                api.machine.getListByProject({projectId: projectId}, function (e) { // 根据项目id请求子项目
+                    console.log(e);
+                    var jixingxuanze = $("#jixingxuanze");
+                    jixingxuanze.empty();
+                    jixingxuanze.append("<option value=''>请选择</option>");
+                    for (var i = 0; i < e.length; i++) {
+                        jixingxuanze.append("<option value='" + e[i].machinname + "'>" + e[i].machinname + "</option>");
+                    }
+                    form.render();
+                });
+            });
+        });
+
+        // 机型选择下拉框监听事件
+        form.on('select(jixingxuanze)', function (data) {
+            console.log(data.value); //得到被选中的值
+            var bllId = $(data.elem).find("option:selected").index() - 1; // 机型选择索引值
+            console.log(bllId);
+            api.machine.getListByProject({projectId: blId}, function (e) { // 根据项目id请求子项目
+                console.log(e);
+                // 动态添加li标签
+                var buzhoutiao = $("#step-bl");
+                buzhoutiao.find("li").remove();
+                buzhoutiao.find("div").remove();
+                $(".step-bar").remove();
+                buzhoutiao.append('<li id="xmsh"><span class="step-name">项目审核</span></li>');
+                // 加载li标签
+                for (var i = 0; i < e[bllId].machineDetail.length; i++) {
+                    if (e[bllId].machineDetail[i].milepost == 1) {
+                        buzhoutiao.append('<li id="EVT"><span class="step-name">EVT</span></li>');
+                        continue;
+                    } else if (e[bllId].machineDetail[i].milepost == 2) {
+                        buzhoutiao.append('<li id="DVT"><span class="step-name">DVT</span></li>');
+                        continue;
+                    } else if (e[bllId].machineDetail[i].milepost == 3) {
+                        buzhoutiao.append('<li id="PVT"><span class="step-name">PVT</span></li>');
+                        continue;
+                    } else if (e[bllId].machineDetail[i].milepost == 4) {
+                        buzhoutiao.append('<li id="PMP"><span class="step-name">PMP</span></li>');
+                        continue;
+                    } else if (e[bllId].machineDetail[i].milepost == 5) {
+                        buzhoutiao.append('<li id="MP"><span class="step-name">MP</span></li>');
+                        continue;
+                    }
+                }
+                var $step = $("#step_demo").step(); // 渲染step步骤条
+                // 在每个li标签下添加form标签
+                buzhoutiao.find("li").append('<div class="layui-form">\n' +
+                    '    <div class="layui-form-item" id="formmokuai"></div>\n' +
+                    '</div>');
+                // 在每个form标签添加ul模块
+                buzhoutiao.find("#formmokuai").append('<ul class="layui-timeline"></ul>');
+                api.node.getWorkNodes({projecttype: 1}, function (rse) {
+                    for (var i = 0; i < rse[0].nodeTasks.length; i++) {
+                        if (rse[0].name == "项目审核") {
+                            $("#xmsh").find("ul").append('<li class="layui-timeline-item" style="float: none;">\n' +
+                                '            <i class="layui-icon layui-timeline-axis"></i>\n' +
+                                '            <div class="layui-timeline-content layui-text">\n' +
+                                '                <div class="layui-timeline-title">'+rse[0].nodeTasks[i].title+'</div>\n' +
+                                '            </div>\n' +
+                                '        </li>')
+                        }
+                        if (!rse[0] || rse[0].name != "项目审核") {
+                            console.log("e[0]的名字不是项目审核！请检查jixingfenjiebao.html第178行代码和接口是否正常！");
+                            break;
+                        }
+                    }
+                });
+                for (var i = 0; i < e[bllId].machineDetail.length; i++) {
+                    console.log(e[bllId]);
+                    if (e[bllId].machineDetail[i].milepost == 1) {
+                        api.node.getWorkNodes({projecttype: 1}, function (rse) {
+                            for (var j = 0; j < rse.length; j++) {
+                                console.log(rse);
+                                if (rse[j].name == "EVT") {
+                                    for (var i = 0; i < rse[j].nodeTasks.length; i++) {
+                                        console.log(rse[j]);
+                                        if (rse[j].name == "EVT") {
+                                            $("#EVT").find("ul").append('<li class="layui-timeline-item" style="float: none;">\n' +
+                                                '            <i class="layui-icon layui-timeline-axis"></i>\n' +
+                                                '            <div class="layui-timeline-content layui-text">\n' +
+                                                '                <div class="layui-timeline-title">'+rse[j].nodeTasks[i].title+'</div>\n' +
+                                                '            </div>\n' +
+                                                '        </li>')
+                                        }
+                                        if (!rse[j] || rse[j].name != "EVT") {
+                                            console.log("e[j]的名字不是EVT！请检查jixingfenjiebao.html是否正常！");
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        continue;
+                    } else if (e[bllId].machineDetail[i].milepost == 2) {
+                        api.node.getWorkNodes({projecttype: 1}, function (rse) {
+                            for (var j = 0; j < rse.length; j++) {
+                                console.log(rse);
+                                if (rse[j].name == "DVT") {
+                                    for (var i = 0; i < rse[j].nodeTasks.length; i++) {
+                                        console.log(rse[j]);
+                                        if (rse[j].name == "DVT") {
+                                            $("#DVT").find("ul").append('<li class="layui-timeline-item" style="float: none;">\n' +
+                                                '            <i class="layui-icon layui-timeline-axis"></i>\n' +
+                                                '            <div class="layui-timeline-content layui-text">\n' +
+                                                '                <div class="layui-timeline-title">'+rse[j].nodeTasks[i].title+'</div>\n' +
+                                                '            </div>\n' +
+                                                '        </li>')
+                                        }
+                                        if (!rse[j] || rse[j].name != "DVT") {
+                                            console.log("e[j]的名字不是DVT！请检查jixingfenjiebao.html是否正常！");
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        continue;
+                    } else if (e[bllId].machineDetail[i].milepost == 3) {
+                        api.node.getWorkNodes({projecttype: 1}, function (rse) {
+                            for (var j = 0; j < rse.length; j++) {
+                                console.log(rse);
+                                if (rse[j].name == "PVT") {
+                                    for (var i = 0; i < rse[j].nodeTasks.length; i++) {
+                                        console.log(rse[j]);
+                                        if (rse[j].name == "PVT") {
+                                            $("#PVT").find("ul").append('<li class="layui-timeline-item" style="float: none;">\n' +
+                                                '            <i class="layui-icon layui-timeline-axis"></i>\n' +
+                                                '            <div class="layui-timeline-content layui-text">\n' +
+                                                '                <div class="layui-timeline-title">'+rse[j].nodeTasks[i].title+'</div>\n' +
+                                                '            </div>\n' +
+                                                '        </li>')
+                                        }
+                                        if (!rse[j] || rse[j].name != "PVT") {
+                                            console.log("e[j]的名字不是PVT！请检查jixingfenjiebao.html是否正常！");
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        continue;
+                    } else if (e[bllId].machineDetail[i].milepost == 4) {
+                        api.node.getWorkNodes({projecttype: 1}, function (rse) {
+                            for (var j = 0; j < rse.length; j++) {
+                                console.log(rse);
+                                if (rse[j].name == "PMP") {
+                                    for (var i = 0; i < rse[j].nodeTasks.length; i++) {
+                                        console.log(rse[j]);
+                                        if (rse[j].name == "PMP") {
+                                            $("#PMP").find("ul").append('<li class="layui-timeline-item" style="float: none;">\n' +
+                                                '            <i class="layui-icon layui-timeline-axis"></i>\n' +
+                                                '            <div class="layui-timeline-content layui-text">\n' +
+                                                '                <div class="layui-timeline-title">'+rse[j].nodeTasks[i].title+'</div>\n' +
+                                                '            </div>\n' +
+                                                '        </li>')
+                                        }
+                                        if (!rse[j] || rse[j].name != "PMP") {
+                                            console.log("e[j]的名字不是PMP！请检查jixingfenjiebao.html是否正常！");
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        continue;
+                    } else if (e[bllId].machineDetail[i].milepost == 5) {
+                        api.node.getWorkNodes({projecttype: 1}, function (rse) {
+                            for (var j = 0; j < rse.length; j++) {
+                                console.log(rse);
+                                if (rse[j].name == "MP") {
+                                    for (var i = 0; i < rse[j].nodeTasks.length; i++) {
+                                        console.log(rse[j]);
+                                        if (rse[j].name == "MP") {
+                                            $("#MP").find("ul").append('<li class="layui-timeline-item" style="float: none;">\n' +
+                                                '            <i class="layui-icon layui-timeline-axis"></i>\n' +
+                                                '            <div class="layui-timeline-content layui-text">\n' +
+                                                '                <div class="layui-timeline-title">'+rse[j].nodeTasks[i].title+'</div>\n' +
+                                                '            </div>\n' +
+                                                '        </li>')
+                                        }
+                                        if (!rse[j] || rse[j].name != "MP") {
+                                            console.log("e[j]的名字不是MP！请检查jixingfenjiebao.html是否正常！");
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        continue;
+                    }
+                }
+                /*$("#preBtn").click(function (event) {
+                    $step.preStep();//上一步
+                });
+                $("#nextBtn").click(function (event) {
+                    $step.nextStep();//下一步
+                });
+                $("#goBtn").click(function (event) {
+                    $step.goStep(3);//到指定步
+                });*/
+            });
+        });
+
+
+        // 监听搜索事件提交
+        form.on('submit(formSubSearchMachine)', function (data) {
+            console.log(data);
+            console.log(data.field);
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>

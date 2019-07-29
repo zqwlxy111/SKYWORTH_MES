@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title></title>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/admin.css?v=312"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/dtree/dtree.css">
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/dtree/font/dtreefont.css">
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/formSelects/formSelects-v4.css">
+</head>
+<style>
+
+    .form-group-bottom {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: #fff;
+        padding: 10px 20px;
+        box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, .05);
+    }
+
+</style>
+<body>
+
+<!-- 正文开始 -->
+<div class="layui-fluid">
+    <form class="layui-form" lay-filter="addPeople-model" id="addPeople-model">
+        <div class="layui-row" style="margin-bottom: 10px">
+
+            <div class="layui-col-lg12">
+                <!--        模块选择-->
+                <div class="layui-card">
+                    <div class="layui-card-header">模块选择</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-row">
+                            <div class="layui-col-md12 ">
+                                <label class="layui-form-label">所属模块 :</label>
+                                <div class="layui-input-block">
+                                    <select name="productCategory" lay-verify="required" lay-verType="tips"
+                                            lay-filter="mokuaixiala">
+                                        <option value=""></option>
+                                        <option value="业务模块">业务模块</option>
+                                        <option value="计划模块">计划模块</option>
+                                        <option value="质量模块">质量模块</option>
+                                        <option value="工程模块">工程模块</option>
+                                        <option value="生产模块">生产模块</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row" style="margin-bottom: 9px">
+            <div class="layui-col-lg12">
+                <div class="layui-card">
+                    <div class="layui-card-header">根据部门树选择部门人员</div>
+                    <div class="layui-card-body">
+                        <div class="layui-row">
+                            <div class="layui-col-sm5">
+                                <div class="row">
+                                    <div class="layui-col-md12">
+                                        <fieldset class="layui-elem-field layui-field-title" style="width: 90%;">
+                                            <legend style="font-size: 16px">部门选择</legend>
+                                        </fieldset>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <ul id="slTree1" class="dtree" data-id="0" style="overflow: hidden"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-sm7">
+                                <div class="row">
+                                    <div class="layui-col-md12">
+                                        <fieldset class="layui-elem-field layui-field-title">
+                                            <legend style="font-size: 16px">员工选择</legend>
+                                        </fieldset>
+                                    </div>
+                                    <div class="layui-col-md12">
+                                        <table class="layui-table" id="projectOverview"
+                                               lay-filter="projectOverview"></table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-row" style="margin-bottom: 9px">
+            <div class="layui-col-lg12">
+                <!--        模块选择-->
+                <div class="layui-card">
+                    <div class="layui-card-header">分解包节点选择</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-row">
+                            <div class="layui-col-md12 ">
+                                <label class="layui-form-label">节点选择 :</label>
+                                <div class="layui-input-block">
+                                    <select id="fenjiebaojiedian" name="fenjiebaojiedian" lay-filter="fenjiebaojiedian"
+                                            lay-verType="tips" lay-verify="required">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-row" style="margin-bottom: 53px">
+            <div class="layui-col-lg12">
+                <!--        模块选择-->
+                <div class="layui-card">
+                    <div class="layui-card-header">职责负责选择</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-row">
+                            <div class="layui-col-md12 ">
+                                <label class="layui-form-label">职责负责 :</label>
+                                <div class="layui-input-block">
+                                    <select id="zhizefuze" name="responsibility" xm-select="select1"
+                                            lay-filter="zhizefuze" lay-verType="tips" lay-verify="required">
+                                        <option value="">请选择</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        <div class="layui-row" style="margin-bottom: 30px">-->
+        <!--            <div class="layui-col-lg12">-->
+        <!--                &lt;!&ndash;        职责&ndash;&gt;-->
+        <!--                <div class="layui-card">-->
+        <!--                    <div class="layui-card-header">模块选择</div>-->
+        <!--                    <div class="layui-card-body">-->
+        <!--                        <div class="layui-form-item layui-row">-->
+        <!--                            <div class="layui-inline layui-col-md12">-->
+        <!--                                <label class="layui-form-label">职责负责 :</label>-->
+        <!--                                <div class="layui-input-block">-->
+        <!--                            <textarea name="responsibility" placeholder="请输入内容" class="layui-textarea"-->
+        <!--                                      lay-verify="required" lay-verType="tips"></textarea>-->
+        <!--                                </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+
+        <div class="form-group-bottom text-right" style="margin: 0 auto; width: 95%;">
+            <button class="layui-btn" lay-filter="formSubmitAdv" lay-submit>&emsp;确认&emsp;</button>
+        </div>
+    </form>
+</div>
+
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/common.js?v=312"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/util.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/api.js"></script>
+
+<script>
+    layui.use(['layer', 'table', 'admin', 'form', 'dtree', 'formSelects'], function () {
+        var layer = layui.layer;
+        var table = layui.table;
+        var admin = layui.admin;
+        var form = layui.form;
+        var dtree = layui.dtree;
+        var formSelects = layui.formSelects;
+
+
+        // 定义接口对象
+        var personsobj = {};
+
+        // 初始化部门树
+        var departmentid = null;
+        $.ajax({
+            type: "GET",
+            url: "http://172.20.248.220:8088/dms/safe_usercenter/safe/department/getDepartmentTree",
+            // url: "https://www.easy-mock.com/mock/5cf1600306cab27e589f9550/safe_usercenter/safe/department/getDepartmentTree",
+            headers: {
+                token: global.userIdentity.token,
+                user: global.userIdentity.user.id,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            success: function (res) {
+                console.log(res);
+                //初始化树
+                var DTree = dtree.render({
+                    elem: "#slTree1",
+                    data: [res],
+                    response: {title: "text"}, // 这里指定了返回的数据格式，组件会根据这些值来替换返回JSON中的指定格式，从而读取信息
+                    initLevel: "5",
+                    ficon: ["-1", "-1"],
+                    line: true,
+                    done: function () {
+                        var params = dtree.click("slTree1", "1");
+                    }
+                });
+            }
+        });
+
+        // 点击部门树节点后弹出部门所属的人员名单
+        var bumen = null; // 部门
+        var gonghao = null; // 工号
+        var renyuan = null; // 人员
+        var renyuanid = null; // 人员id
+        dtree.on("node('slTree1')", function (obj) {
+            // layer.msg(JSON.stringify(obj.param));
+            departmentid = obj.param.nodeId;
+            $.ajax({
+                type: "GET",
+                url: "http://172.20.248.220:8088/dms/safe_usercenter/safe/user/getUsersListByDepartmentId?departmentId=" + departmentid + "&start=0&limit=100",
+                // url: "https://www.easy-mock.com/mock/5cf1600306cab27e589f9550/safe_usercenter/safe/user/getUsersListByDepartmentId",
+                headers: {
+                    token: global.userIdentity.token,
+                    user: global.userIdentity.user.id,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                success: function (res1) {
+                    console.log(res1.result);
+                    var data = res1.result;
+                    table.render({
+                        elem: '#projectOverview',
+                        data: data,
+                        page: true,
+                        cellMinWidth: 100,
+                        cols: [[
+                            {type: 'radio'},
+                            // {field: 'type', title: '所属部门' ,align:"center"},
+                            {field: 'code', title: '员工工号', align: "center"},
+                            {field: 'realName', title: '员工姓名', align: "center"}
+                        ]]
+                    });
+                }
+            });
+        });
+
+        // 获取选中的人员的对象
+        table.on('radio(projectOverview)', function (obj) {
+            console.log(obj.data); //选中行的相关数据
+            bumen = obj.data.departmentsStr;
+            renyuan = obj.data.realName;
+            gonghao = obj.data.code;
+            renyuanid = obj.data.id;
+        });
+
+        // 分解包节点选择
+        api.node.getWorkNodes({projecttype: 1}, function (e) {
+            console.log(e);
+            // console.log(JSON.stringify(e));
+            for (var i = 0; i < e.length; i++) {
+                $("#fenjiebaojiedian").append("<option value='" + e[i].name + "'>" + e[i].name + "</option>");
+            }
+            form.render();
+        });
+
+        // 职责节点选择
+        formSelects.btns('select1', []); // 定义空图标库
+        var indexi = null; // 分解包节点的index索引值
+        form.on('select(fenjiebaojiedian)', function (data) {
+            console.log(data.value); //得到被选中的值
+            var index = $(data.elem).find("option:selected").index(); // 获取选中的分解包节点的index索引值
+            indexi = index - 1;
+            console.log(index);
+            api.node.getWorkNodes({projecttype: 1}, function (e) {
+                console.log(e);
+                console.log(e[0]);
+                for (var i = 0; i < e.length; i++) {
+                    if (data.value === e[i].name) {
+                        $("#zhizefuze").empty();
+                        $("#zhizefuze").append("<option value=''>请选择</option>");
+                        for (var j = 0; j < e[i].nodeTasks.length; j++) {
+                            // console.log(e[i].nodeTasks[j].title);
+                            $("#zhizefuze").append("<option value='" + e[i].nodeTasks[j].title + "'>" + e[i].nodeTasks[j].title + "</option>");
+                        }
+                    }
+                }
+                // 对目标form表单进行动态的重新渲染
+                formSelects.render('select1');
+            });
+        });
+
+        var listobjh = {}; // 传给后台接口
+        listobjh.dutys = [];
+
+        //  获取职责duty的id
+        layui.formSelects.on('select1', function (id, vals, val, isAdd, isDisabled) {
+            /*
+            id:           点击select的id
+            vals:         当前select已选中的值
+            val:          当前select点击的值
+            isAdd:        当前操作选中or取消
+            isDisabled:   当前选项是否是disabled
+            */
+            /*console.log(vals);
+            console.log(id);
+            console.log(val);
+            console.log(val.name);
+            console.log(isAdd);*/
+            var isc = false; // 设置是否有重复值 默认为false
+            if (!isAdd) {
+                for (var j = 0; j < listobjh.dutys.length; j++) {
+                    if (val.name == listobjh.dutys[j].dutyname) {
+                        listobjh.dutys.splice(j, 1);
+                        break;
+                    }
+                }
+                console.log(listobjh.dutys);
+                return false;
+            } else {
+                for (var i = 0; i < listobjh.dutys.length; i++) {
+                    if (val.name == listobjh.dutys[i].dutyname) {
+                        isc = true; // 有重复值
+                        break;
+                    }
+                }
+                if (!isc) {
+                    api.node.getWorkNodes({projecttype: 1}, function (e) {
+                        console.log(e);
+                        for (var i = 0; i < e[indexi].nodeTasks.length; i++) {
+                            if (val.name == e[indexi].nodeTasks[i].title) {
+                                var dutyobj = {}; // 定义后台传duty数组的对象
+                                dutyobj.duty = e[indexi].nodeTasks[i].id;
+                                dutyobj.dutyname = e[indexi].nodeTasks[i].title;
+                                listobjh.dutys.push(dutyobj);
+                                console.log(dutyobj.duty);
+                                console.log(listobjh.dutys);
+                            }
+                        }
+                    });
+                }
+            }
+            console.log(listobjh.dutys);
+        }, true);
+
+        // 监听submit表单提交
+        form.on('submit(formSubmitAdv)', function (data) {
+            console.log(data.field);
+            window.parent.wmokuai = data.field.productCategory;
+            listobjh.person = renyuanid;
+            listobjh.personname = renyuan;
+            listobjh.dutyname = data.field.responsibility;
+            window.parent.persons.push(listobjh);
+            console.log(window.parent.persons);
+
+            var listobj = {}; // 传给前台显示数据接口对象
+            listobj.mokuai = data.field.productCategory;
+            listobj.zhize = data.field.responsibility;
+            listobj.renyuan = renyuan;
+            listobj.bumen = "智能设备部";
+            listobj.gonghao = gonghao;
+            if (listobj.mokuai == "业务模块") {
+                listobjh.moduletype = 1;
+                window.parent.wlist1.push(listobj);
+            } else if (listobj.mokuai == "计划模块") {
+                listobjh.moduletype = 2;
+                window.parent.wlist2.push(listobj);
+            } else if (listobj.mokuai == "质量模块") {
+                listobjh.moduletype = 3;
+                window.parent.wlist3.push(listobj);
+            } else if (listobj.mokuai == "工程模块") {
+                listobjh.moduletype = 4;
+                window.parent.wlist4.push(listobj);
+            } else if (listobj.mokuai == "生产模块") {
+                listobjh.moduletype = 5;
+                window.parent.wlist5.push(listobj);
+            }
+            console.log(listobj);
+            // console.log(layui.formSelects.value('select1','val')); //取值name数组
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            parent.layer.close(index); //再执行关闭
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

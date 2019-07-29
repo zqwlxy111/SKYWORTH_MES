@@ -1,0 +1,98 @@
+{
+  "根据systemid查询角色列表":"http://172.20.73.16:8080/safe_usercenter/safe/role/getRolesBySystemIds?systemIds=0,1,2&start=0&limit=10",
+  "id": null,
+  "success": true,
+  "msg": "成功",
+  "total": 0,
+  "result": [
+    {
+      "id": 3,
+      "name": "OMS管理员",
+      "bak": null,
+      "status": 1,
+      "systemId": 2
+    },
+    {
+      "id": 4,
+      "name": "MES管理员",
+      "bak": null,
+      "status": 1,
+      "systemId": 1
+    }
+  ]
+}
+
+
+
+
+
+
+
+//http://172.20.73.16:8080/safe_usercenter/safe/department/updateDepartment  DepartmentView对象 json
+
+
+//修改用户状态
+//http://172.20.73.16:8080/safe_usercenter/safe/user/updateUserStatus?id=2&status=1    修改用户状态 1正常 2禁用
+
+
+//根据用户ID获取用户信息
+//http://172.20.73.16:8080/safe_usercenter/safe/user/getUserByUserId?id=2
+
+
+//根据用户名称获取用户信息
+//http://172.20.73.16:8080/safe_usercenter/safe/user/getUserByUserName?username=qxf
+
+
+//获取用户列表
+//http://172.20.73.16:8080/safe_usercenter/safe/user/getUsersList
+//根据部门ID获取用户列表
+//http://172.20.73.16:8080/safe_usercenter/safe/user/getUsersListByDepartmentId?departmentId=0&start=0&limit=10
+
+
+
+//修改用户角色
+//http://172.20.73.16:8080/safe_usercenter/safe/user/updateUserRole?id=1&roleIds=1,2,3
+
+//修改用户系统
+//http://172.20.73.16:8080/safe_usercenter/safe/user/updateUserSystem?id=1&systemIds=1,2,3
+//修改用户部门
+//http://172.20.73.16:8080/safe_usercenter/safe/user/updateUserDepartment?id=1&departmentIds=8,9
+//更新密码
+//http://172.20.73.16:8080/safe_usercenter/safe/user/updatePassword?id=2&pwOld=123&pwNew=Sa111
+
+
+//增加用户
+//http://172.20.73.16:8080/safe_usercenter/safe/user/addUser
+//修改用户
+//http://172.20.73.16:8080/safe_usercenter/safe/user/updateUser
+
+
+//获取所有系统
+//http://172.20.73.16:8080/safe_usercenter/safe/syss/getSystems
+
+
+//根据 角色获取权限
+//http://172.20.73.16:8080/safe_usercenter/safe/function/getFunctionTreeByRoleId?roleId=1
+
+//http://172.20.73.16:8080/safe_usercenter/safe/function/updateSingleRoleFunction?roleId=1&functionId=MES_B_DEVICE_INFO&selected=true
+
+//http://172.20.73.16:8080/safe_usercenter/safe/function/updateRoleFunctions  RoleFunc对象 json
+
+
+//增加角色
+//http://172.20.73.16:8080/safe_usercenter/safe/role/addRole
+//修改角色
+//http://172.20.73.16:8080/safe_usercenter/safe/role/updateRole
+//删除角色
+//http://172.20.73.16:8080/safe_usercenter/safe/role/deleteRole?id=8855
+
+//获取所有角色
+//http://172.20.73.16:8080/safe_usercenter/safe/role/getRoles?start=0&limit=10
+
+//根据systemid查询角色列表
+//http://172.20.73.16:8080/safe_usercenter/safe/role/getRolesBySystemIds?systemIds=1,2&start=0&limit=100
+
+//根据用户查询角色列表
+//http://172.20.73.16:8080/safe_usercenter/safe/role/getRolesByUserId?id=1
+
+

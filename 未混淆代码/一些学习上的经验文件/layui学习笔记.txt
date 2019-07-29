@@ -1,0 +1,29 @@
+﻿1.  lay-filter="example" 相当于一个layui自身的id选择器
+2.  layui-inline 和 layui-block 是定义外部容器的inline和block属性的class
+3.  layui-input-block 和 layui-input-inline 是定义的是输入框的inline和block属性的,block占满整个容器的宽，inline为短框。
+4.  layui-card是layui面板组件，背景为白色的小卡板
+5.  layui扩展组件的只需要用layui.config({base:''}).use();务必记住base写的是组件js的存放的根目录，后面必须带有/，不然报错！也可以在config后添加extend函数为不在根目录下的模块文件添加指定模块目录。
+6.  jquery的ajax异步请求接收返回json数据方法设置简单，一个是服务器处理程序是返回json数据，另一种就是ajax发送设置的datatype设置为jsonp格式数据或json格式都可以。
+7.  如果js代码写在body上面的话，应该先加载body的内容才执行代码的话，应该先用window.onload()函数
+8.  toggleClass()函数为标签新增class属性，如果这个添加的class属性存在的话那么就移除，否则就添加。
+9.  bar也属于document，点击bar也会让自己隐藏，显然这不是想要的，这时候要阻止冒泡事件，即document的事件对bar无效
+    $("#bar").click(function(event){
+    event.stopPropagation();
+    });
+10. dtree默认接收的是一个json的对象。
+11. top.layui.admin.open()使得弹出窗口在最外层的父页面。
+12. 子页面操作父页面的元素或者获取父页面的值或者方法必须要在父页面所需要操作的变量添加parent属性
+13. parent返回的是一个数组，可以指定自定义的返回的parent，可以在子页面直接使用parent.方法来使用父页面的方法，但是要获取父页面的值还需要在父页面定义该值的parent属性
+14. JSON 通常用于与服务端交换数据。在向服务器发送数据时一般是字符串。我们可以使用 JSON.stringify() 方法将 JavaScript 对象转换为字符串。
+15. 遍历一个对象的所有属性：
+            for(var st in checkObj[0]) {
+                console.dir(st);
+            }
+16. layui-inline 不要和layui-col-md之类的栅格布局代码写在一起，不然会发生致命的错误
+17. var oldTime = (new Date(data.field.evt)).getTime(); //得到毫秒数
+    var newTime = new Date(oldTime); //就得到普通的时间了
+18. 前端分页是指后台直接将所有的数据返回到前端，由前端进行数据的处理和分页；后台分页是指前端根据ajax发送页码和条数从后台拿到返回的数据，一页页去展示
+19. https://www.iviewui.com/
+20. 在for循环里面，如果使用对象更新到数组里面，一定要在for循环里面定义对象然后更新数组，不要在外面定义对象然后在for循环里面使用这个对象，不然之前的对象会跟着发生变化。
+21. 在请求接口中，如果定义一个变量是在请求之后得到的数据赋值的话，那么程序先执行完全局语句才返回请求返回的数据。
+22.

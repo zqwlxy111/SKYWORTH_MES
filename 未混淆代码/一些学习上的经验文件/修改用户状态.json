@@ -1,0 +1,7 @@
+{
+  "修改用户状态":"http://172.20.73.16:8080/safe_usercenter/safe/user/updateUserStatus?id=2&status=1    修改用户状态 1正常 2禁用",
+  "id": null,
+  "success": true,
+  "msg": "成功",
+  "token": null
+}

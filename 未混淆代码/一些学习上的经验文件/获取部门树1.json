@@ -1,0 +1,405 @@
+{
+  "获取部门树":"http://172.20.73.16:8080/safe_usercenter/safe/department/getDepartmentTree",
+  "id": 1,
+  "text": "创维集团",
+  "obj": {
+    "id": 1,
+    "name": "创维集团",
+    "code": "1",
+    "parentId": null,
+    "bak": null,
+    "headOfUnit": 1,
+    "salveOfUnit": 47,
+    "status": 1,
+    "parentName": null,
+    "headOfUnitName": "sa",
+    "salveOfUnitName": "denglichun"
+  },
+  "children": [
+    {
+      "id": 2,
+      "text": "创维RGB公司",
+      "obj": {
+        "id": 2,
+        "name": "创维RGB公司",
+        "code": "0755",
+        "parentId": 1,
+        "bak": null,
+        "headOfUnit": null,
+        "salveOfUnit": null,
+        "status": 1,
+        "parentName": "创维集团",
+        "headOfUnitName": null,
+        "salveOfUnitName": null
+      },
+      "children": [
+        {
+          "id": 3,
+          "text": "RGB制造总部",
+          "obj": {
+            "id": 3,
+            "name": "RGB制造总部",
+            "code": "0755",
+            "parentId": 2,
+            "bak": null,
+            "headOfUnit": null,
+            "salveOfUnit": null,
+            "status": 1,
+            "parentName": "创维RGB公司",
+            "headOfUnitName": null,
+            "salveOfUnitName": null
+          },
+          "children": [
+            {
+              "id": 4,
+              "text": "智能设备部",
+              "obj": {
+                "id": 4,
+                "name": "智能设备部",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": [
+                {
+                  "id": 13,
+                  "text": "智能制造科",
+                  "obj": {
+                    "id": 13,
+                    "name": "智能制造科",
+                    "code": "0755",
+                    "parentId": 4,
+                    "bak": null,
+                    "headOfUnit": null,
+                    "salveOfUnit": null,
+                    "status": 1,
+                    "parentName": "智能设备部",
+                    "headOfUnitName": null,
+                    "salveOfUnitName": null
+                  },
+                  "children": null,
+                  "leaf": true,
+                  "expanded": true
+                },
+                {
+                  "id": 14,
+                  "text": "设备管理科",
+                  "obj": {
+                    "id": 14,
+                    "name": "设备管理科",
+                    "code": "0755",
+                    "parentId": 4,
+                    "bak": null,
+                    "headOfUnit": null,
+                    "salveOfUnit": null,
+                    "status": 1,
+                    "parentName": "智能设备部",
+                    "headOfUnitName": null,
+                    "salveOfUnitName": null
+                  },
+                  "children": null,
+                  "leaf": true,
+                  "expanded": true
+                },
+                {
+                  "id": 15,
+                  "text": "研发一科",
+                  "obj": {
+                    "id": 15,
+                    "name": "研发一科",
+                    "code": "0755",
+                    "parentId": 4,
+                    "bak": null,
+                    "headOfUnit": null,
+                    "salveOfUnit": null,
+                    "status": 1,
+                    "parentName": "智能设备部",
+                    "headOfUnitName": null,
+                    "salveOfUnitName": null
+                  },
+                  "children": null,
+                  "leaf": true,
+                  "expanded": true
+                }
+              ],
+              "leaf": false,
+              "expanded": true
+            },
+            {
+              "id": 9,
+              "text": "工程技术部",
+              "obj": {
+                "id": 9,
+                "name": "工程技术部",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 10,
+              "text": "质量管理部",
+              "obj": {
+                "id": 10,
+                "name": "质量管理部",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 11,
+              "text": "物流管理部",
+              "obj": {
+                "id": 11,
+                "name": "物流管理部",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 12,
+              "text": "计划物控部",
+              "obj": {
+                "id": 12,
+                "name": "计划物控部",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 18,
+              "text": "人力资源部",
+              "obj": {
+                "id": 18,
+                "name": "人力资源部",
+                "code": "0833",
+                "parentId": 3,
+                "bak": "1311",
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 100,
+              "text": "深圳平板厂",
+              "obj": {
+                "id": 100,
+                "name": "深圳平板厂",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 101,
+              "text": "南京工厂",
+              "obj": {
+                "id": 101,
+                "name": "南京工厂",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 102,
+              "text": "江西工厂",
+              "obj": {
+                "id": 102,
+                "name": "江西工厂",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 103,
+              "text": "内蒙工厂",
+              "obj": {
+                "id": 103,
+                "name": "内蒙工厂",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 104,
+              "text": "广州工厂",
+              "obj": {
+                "id": 104,
+                "name": "广州工厂",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            },
+            {
+              "id": 105,
+              "text": "印尼海外工厂",
+              "obj": {
+                "id": 105,
+                "name": "印尼海外工厂",
+                "code": "0755",
+                "parentId": 3,
+                "bak": null,
+                "headOfUnit": null,
+                "salveOfUnit": null,
+                "status": 1,
+                "parentName": "RGB制造总部",
+                "headOfUnitName": null,
+                "salveOfUnitName": null
+              },
+              "children": null,
+              "leaf": true,
+              "expanded": true
+            }
+          ],
+          "leaf": false,
+          "expanded": true
+        }
+      ],
+      "leaf": false,
+      "expanded": true
+    },
+    {
+      "id": 16,
+      "text": "创维厨电公司",
+      "obj": {
+        "id": 16,
+        "name": "创维厨电公司",
+        "code": "0755",
+        "parentId": 1,
+        "bak": null,
+        "headOfUnit": null,
+        "salveOfUnit": null,
+        "status": 1,
+        "parentName": "创维集团",
+        "headOfUnitName": null,
+        "salveOfUnitName": null
+      },
+      "children": null,
+      "leaf": true,
+      "expanded": true
+    },
+    {
+      "id": 17,
+      "text": "创维冰洗公司",
+      "obj": {
+        "id": 17,
+        "name": "创维冰洗公司",
+        "code": "0755",
+        "parentId": 1,
+        "bak": null,
+        "headOfUnit": null,
+        "salveOfUnit": null,
+        "status": 1,
+        "parentName": "创维集团",
+        "headOfUnitName": null,
+        "salveOfUnitName": null
+      },
+      "children": null,
+      "leaf": true,
+      "expanded": true
+    }
+  ],
+  "leaf": false,
+  "expanded": true
+}

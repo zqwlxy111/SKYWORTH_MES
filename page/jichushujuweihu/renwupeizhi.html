@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>项目总览</title>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/admin.css?v=312"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/steps/style.css">
+    <style>
+        #step_demo {
+            padding: 19px 3px 5px 23px;
+        }
+    </style>
+</head>
+<body>
+<!-- 正文开始 -->
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body">
+            <div class="layui-form toolbar">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label w-auto">项目类型选择：</label>
+                        <div class="layui-input-inline mr0">
+                            <select id="xiangmuleixingxuanze" name="xiangmuleixingxuanze"
+                                    lay-filter="xiangmuleixingxuanze"
+                                    lay-verType="tips" lay-verify="required">
+                                <option value="">请选择</option>
+                                <option value="外销项目">外销项目</option>
+                                <option value="内销项目">内销项目</option>
+                                <option value="B2B项目">B2B项目</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <button id="btnAddAuth" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加</button>
+                        <button id="btnExpandAuth" class="layui-btn icon-btn">全部展开</button>
+                    </div>
+                    <div class="layui-inline">
+                        <button id="btnFoldAuth" class="layui-btn icon-btn">全部折叠</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="layui-bg-green">
+            <table class="layui-table" id="tableAuth" lay-filter="tableAuth"></table>
+        </div>
+    </div>
+</div>
+
+<!-- 表格操作列 -->
+<script type="text/html" id="tableBarAuth">
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+<!-- 表单弹窗 -->
+<script type="text/html" id="modelAuth">
+    <form id="modelAuthForm" lay-filter="modelAuthForm" class="layui-form model-form">
+        <input name="authorityId" type="hidden"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label">上级菜单</label>
+            <div class="layui-input-block">
+                <select name="parentId" lay-search>
+                    <option value="">请选择上级菜单</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限名称</label>
+            <div class="layui-input-block">
+                <input name="authorityName" placeholder="请输入权限名称" type="text" class="layui-input" maxlength="50"
+                       lay-verType="tips" lay-verify="required" required/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限类型</label>
+            <div class="layui-input-block">
+                <input name="isMenu" type="radio" value="0" title="阶段" checked/>
+                <input name="isMenu" type="radio" value="1" title="节点"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单url</label>
+            <div class="layui-input-block">
+                <input name="menuUrl" placeholder="请输入菜单url" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">权限标识</label>
+            <div class="layui-input-block">
+                <input name="authority" placeholder="请输入权限标识" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">菜单图标</label>
+            <div class="layui-input-block">
+                <input name="menuIcon" placeholder="请输入菜单图标" type="text" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">排序号</label>
+            <div class="layui-input-block">
+                <input name="orderNumber" placeholder="请输入排序号" type="number" class="layui-input" min="0" max="1000"
+                       lay-verType="tips" lay-verify="required|number" required/>
+            </div>
+        </div>
+        <div class="layui-form-item text-right">
+            <button class="layui-btn layui-btn-primary" type="button" ew-event="closePageDialog">取消</button>
+            <button class="layui-btn" lay-filter="modelSubmitAuth" lay-submit>保存</button>
+        </div>
+    </form>
+</script>
+
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/common.js?v=312"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/util.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/api.js"></script>
+
+<!--自定义js-->
+<script>
+    layui.use(['layer', 'form', 'table', 'admin', 'treetable'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        var admin = layui.admin;
+        var treetable = layui.treetable;
+
+        form.on('select(xiangmuleixingxuanze)', function (data) {
+            if (data.value == "内销项目") {
+                // 获取任务配置的接口调用
+                var renwudata = [];
+                api.node.getWorkNodes({projecttype: 1}, function (e) {
+                    console.log(e);
+                    for (var i = 0; i < e.length; i++) {
+                        var renwuobj = {}; // 定义一个任务对象 便于以后将对象存到renwudata数组里面
+                        renwuobj.authorityId = i + 1;
+                        renwuobj.authorityName = e[i].name;
+                        renwuobj.parentId = -1;
+                        renwuobj.isMenu = 0;
+                        renwudata.push(renwuobj);
+                    }
+                    for (var i = 0; i < e.length; i++) {
+                        for (var j = 0; j < e[i].nodeTasks.length; j++) {
+                            var renwuobj = {}; // 定义一个任务对象 便于以后将对象存到renwudata数组里面
+                            renwuobj.authorityId = renwudata.length + 1;
+                            renwuobj.authorityName = e[i].nodeTasks[j].title;
+                            renwuobj.parentId = i + 1;
+                            renwuobj.isMenu = 1;
+                            renwudata.push(renwuobj);
+                        }
+                    }
+                    console.log(renwudata);
+                    // 渲染表格
+                    treetable.render({
+                        treeColIndex: 1,
+                        treeSpid: -1,
+                        treeIdName: 'authorityId',
+                        treePidName: 'parentId',
+                        elem: '#tableAuth',
+                        // url: '../../json/authorities.json',
+                        data: renwudata,
+                        cellMinWidth: 100,
+                        cols: [[
+                            {type: 'numbers', title: '#'},
+                            {field: 'authorityName', title: '阶段配置', align: 'left', minWidth: 200},
+                            {
+                                title: '类型', templet: function (d) {
+                                    var strs = ['<span class="layui-badge-rim">阶段</span>', '<span class="layui-badge layui-bg-gray">节点</span>'];
+                                    return strs[d.isMenu];
+                                }, align: 'center'
+                            },
+                            {templet: '#tableBarAuth', title: '操作', align: 'center', minWidth: 120}
+                        ]]
+                    });
+                });
+            }
+        });
+
+        // 添加按钮点击事件
+        $('#btnAddAuth').click(function () {
+            showEditModel();
+        });
+
+        // 工具条点击事件
+        table.on('tool(tableAuth)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            if (layEvent === 'edit') { // 修改
+                showEditModel(data);
+            } else if (layEvent === 'del') { // 删除
+                doDel(data.authorityId, data.authorityName);
+            }
+        });
+
+        // 删除
+        function doDel(authorityId, authorityName) {
+            layer.confirm('确定要删除“' + authorityName + '”吗？', {
+                skin: 'layui-layer-admin',
+                shade: .1
+            }, function (index) {
+                layer.close(index);
+                layer.load(2);
+                $.get('../../json/ok.json', {
+                    authorityId: authorityId
+                }, function (res) {
+                    layer.closeAll('loading');
+                    if (res.code == 200) {
+                        layer.msg(res.msg, {icon: 1});
+                        renderTable();
+                    } else {
+                        layer.msg(res.msg, {icon: 2});
+                    }
+                }, 'json');
+            });
+        }
+
+        // 显示表单弹窗
+        function showEditModel(mAuth) {
+            admin.open({
+                type: 1,
+                title: (mAuth ? '修改' : '添加') + '权限',
+                content: $('#modelAuth').html(),
+                success: function (layero, dIndex) {
+                    $(layero).children('.layui-layer-content').css('overflow', 'visible');
+                    var url = mAuth ? '../../json/ok.json' : '../../json/ok.json';
+                    if (mAuth && mAuth.isMenu == '1') {
+                        $('#modelAuthForm input[name="isMenu"][value="1"]').prop("checked", true);
+                    }
+                    form.val('modelAuthForm', mAuth);  // 回显数据
+                    // 表单提交事件
+                    form.on('submit(modelSubmitAuth)', function (data) {
+                        if (data.field.parentId == '') {
+                            data.field.parentId = '-1';
+                        }
+                        layer.load(2);
+                        $.get(url, data.field, function (res) {
+                            layer.closeAll('loading');
+                            if (res.code == 200) {
+                                layer.close(dIndex);
+                                layer.msg(res.msg, {icon: 1});
+                                renderTable();
+                            } else {
+                                layer.msg(res.msg, {icon: 2});
+                            }
+                        }, 'json');
+                        return false;
+                    });
+                }
+            });
+        }
+
+        // 搜索按钮点击事件
+        $('#btnSearchAuth').click(function () {
+            $('#edtSearchAuth').removeClass('layui-form-danger');
+            var keyword = $('#edtSearchAuth').val();
+            var $tds = $('#tableAuth').next('.treeTable').find('.layui-table-body tbody tr td');
+            $tds.css('background-color', 'transparent');
+            if (!keyword) {
+                layer.msg("请输入关键字", {icon: 5, anim: 6});
+                $('#edtSearchAuth').addClass('layui-form-danger');
+                $('#edtSearchAuth').focus();
+                return;
+            }
+            var searchCount = 0;
+            $tds.each(function () {
+                if ($(this).text().indexOf(keyword) >= 0) {
+                    $(this).css('background-color', '#FAE6A0');
+                    if (searchCount == 0) {
+                        $('body,html').stop(true);
+                        $('body,html').animate({scrollTop: $(this).offset().top - 150}, 500);
+                    }
+                    searchCount++;
+                }
+            });
+            if (searchCount == 0) {
+                layer.msg("没有匹配结果", {icon: 5, anim: 6});
+            } else {
+                treetable.expandAll('#tableAuth');
+            }
+        });
+
+        $('#btnExpandAuth').click(function () {
+            treetable.expandAll('#tableAuth');
+        });
+
+        $('#btnFoldAuth').click(function () {
+            treetable.foldAll('#tableAuth');
+        });
+
+    });
+</script>
+
+</body>
+
+</html>

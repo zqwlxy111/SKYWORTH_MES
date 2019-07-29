@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>外销项目立项</title>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/admin.css?v=312"/>
+    <style>
+        #export-pin .layui-form-item {
+            margin-bottom: 0;
+            margin-top: 20px;
+        }
+
+        #export-pin .layui-form-item .layui-inline {
+            margin-bottom: 25px;
+            margin-right: 0;
+        }
+
+        .form-group-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, .05);
+        }
+    </style>
+</head>
+<body>
+
+<!-- 加载动画 -->
+<!--<div class="page-loading">-->
+<!--    <div class="ball-loader">-->
+<!--        <span></span><span></span><span></span><span></span>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- 正文开始 -->
+<form class="layui-form" lay-filter="Export-pin" id="export-pin">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+
+        <!--        项目名称和项目定位-->
+        <div class="layui-card">
+            <div class="layui-card-header">外销项目立项</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">项目名称 :</label>
+                        <div class="layui-input-block">
+                            <input name="ckName" type="text" placeholder="请输入项目名称" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">项目类型 :</label>
+                        <div class="layui-input-block">
+                            <input name="Item-category" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        新内容描述-->
+        <div class="layui-card">
+            <div class="layui-card-header">新内容描述</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">新功能 :</label>
+                        <div class="layui-input-block">
+                            <input name="newFunction" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">新工艺 :</label>
+                        <div class="layui-input-block">
+                            <input name="newProcess" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">新材料 :</label>
+                        <div class="layui-input-block">
+                            <input name="newMaterial" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        功能描述和要求-->
+        <div class="layui-card">
+            <div class="layui-card-header">功能描述和要求</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">功能描述和要求 :</label>
+                        <div class="layui-input-block">
+                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        产品进度计划-->
+        <div class="layui-card">
+            <div class="layui-card-header">产品进度计划</div>
+            <div class="layui-card-body">
+                <!--                增加删除按钮-->
+                <div class="layui-col-md12 "  style="margin-bottom: 20px; margin-top: 10px ">
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-sm"><i class="layui-icon layui-icon-add-1"></i>添加 </button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-sm"><i class="layui-icon layui-icon-delete"></i>删除 </button>
+                </div>
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <!--                        <label class="layui-form-label">功能描述和要求:</label>-->
+                        <!--                        <div class="layui-input-block">-->
+                        <!--                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>-->
+                        <!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        项目达成目标设定-->
+        <div class="layui-card">
+            <div class="layui-card-header">项目达成目标设定</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">进度目标 :</label>
+                        <div class="layui-input-block">
+                            <input name="Progress-target" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">质量目标 :</label>
+                        <div class="layui-input-block">
+                            <input name="Quality-target" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">效率目标 :</label>
+                        <div class="layui-input-block">
+                            <input name="Efficiency-target" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        项目主要领导-->
+        <div class="layui-card">
+            <div class="layui-card-header">项目总成员分配</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">项目组长 :</label>
+                        <div class="layui-input-block">
+                            <input name="Progress-target" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required id="libinglin"/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">项目负责人 :</label>
+                        <div class="layui-input-block">
+                            <input name="Quality-target" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required id="libinglin1"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        项目模块主要成员-->
+        <div class="layui-card">
+            <div class="layui-card-header">项目各模块主要成员分配</div>
+            <div class="layui-card-body">
+                <!--                <div class="layui-btn-group" style="margin: 15px 0px -6px 40px;">-->
+                <!--                    <div class="site-demo-button" id="layerDemo" style="margin-bottom: 0;">-->
+                <!--                        &lt;!&ndash;增加按钮&ndash;&gt;-->
+                <!--                        <div data-method="setTop" class="layui-btn layui-btn-sm">增加</div>-->
+                <!--                        &lt;!&ndash;编辑按钮&ndash;&gt;-->
+                <!--                        &lt;!&ndash;<div data-method="setTop" class="layui-btn layui-btn-sm ">编辑</div>&ndash;&gt;-->
+                <!--                        &lt;!&ndash;删除按钮&ndash;&gt;-->
+                <!--                        <div data-method="setTop" class="layui-btn layui-btn-sm">删除</div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <div class="layui-col-md12" style="margin-bottom: 20px; margin-top: 10px ">
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-sm" id="libinglin-btn"><i class="layui-icon layui-icon-add-1"></i>添加 </button>
+                    <button type="button" class="layui-btn layui-btn-radius layui-btn-sm"><i class="layui-icon layui-icon-delete"></i>删除 </button>
+                </div>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">业务模块</legend>
+                    <table id="tb1" lay-filter="tb1"></table>
+                </fieldset>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">计划模块</legend>
+                </fieldset>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">质量模块</legend>
+                </fieldset>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">工程模块</legend>
+                </fieldset>
+                <fieldset class="layui-elem-field layui-field-title" style="margin-top: 21px;">
+                    <legend style="font-size: 15px; margin-left: 50px;">生产模块</legend>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group-bottom text-right" style="margin: 0 auto; width: 96%;">
+        <button type="reset" class="layui-btn layui-btn-primary">&emsp;重置&emsp;</button>
+        <button class="layui-btn" lay-filter="formSubmitAdv2" lay-submit>&emsp;保存&emsp;</button>
+        <button class="layui-btn" lay-filter="formSubmitAdv3" lay-submit>&emsp;上传&emsp;</button>
+        <button class="layui-btn" lay-filter="formSubmitAdv4" lay-submit>&emsp;导出&emsp;</button>
+        <button class="layui-btn" lay-filter="formSubmitAdv" lay-submit>&emsp;提交&emsp;</button>
+    </div>
+
+</form>
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/common.js?v=312"></script>
+
+<script>
+    layui.use(['layer', 'form', 'table', 'util', 'laydate','admin'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        var util = layui.util;
+        var laydate = layui.laydate;
+        var admin = layui.admin;
+
+        //表单初始赋值
+        // form.val('Export-pin', {
+        //     "Item-category": "外销产品"
+        // });
+
+        //触发事件
+        // var active = {
+        //     setTop: function () {
+        //         top.layui.admin.open({
+        //             type: 2, //此处以iframe举例
+        //             title: '添加项目模块人员',
+        //             area: ['460px', '550px'],
+        //             shade: 0.8,
+        //             maxmin: false,
+        //             anim: 0,
+        //             closeBtn: 1,
+        //             offset: 'auto',
+        //             //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+        //             content: getProjectUrl() + 'page/add/addPeople-pin.html',
+        //             // btn2: function () {
+        //             //     layer.closeAll();
+        //             // }
+        //
+        //             zIndex: layer.zIndex //重点1
+        //             ,
+        //             success: function (layero,index) {
+        //                 console.log(layero);
+        //                 var body = layer.getChildFrame('body', index);
+        //                 var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+        //                 // console.log(body); //得到iframe页的body内容
+        //                 // body.find('input').val('Hi，我是从父页来的');
+        //             },
+        //             cancel: function (index, layero) {
+        //                 // if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
+        //                 //     layer.close(index);
+        //                 // }
+        //                 // return false;
+        //             }
+        //         });
+        //     },
+        //     newProduct: function () {
+        //         top.layui.admin.open({
+        //             type: 2, //此处以iframe举例
+        //             title: '添加产品进度计划',
+        //             area: ['785px', '750px'],
+        //             shade: 0.8,
+        //             maxmin: false,
+        //             anim: 0,
+        //             closeBtn: 1,
+        //             offset: 'auto',
+        //             //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+        //             content: getProjectUrl() + 'page/add/addModel.html',
+        //             // btn2: function () {
+        //             //     layer.closeAll();
+        //             // }
+        //
+        //             zIndex: layer.zIndex //重点1
+        //             ,
+        //             success: function (layero,index) {
+        //                 console.log(layero);
+        //                 var body = layer.getChildFrame('body', index);
+        //                 var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
+        //                 // console.log(body); //得到iframe页的body内容
+        //                 // body.find('input').val('Hi，我是从父页来的');
+        //             },
+        //             cancel: function (index, layero) {
+        //                 // if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
+        //                 //     layer.close(index);
+        //                 // }
+        //                 // return false;
+        //             }
+        //         });
+        //     }
+        // };
+        // $('.layui-btn').on('click', function () {
+        //     var othis = $(this),
+        //         method = othis.data('method');
+        //     active[method] ? active[method].call(this, othis) : '';
+        // });
+
+
+        // test
+        // var mDataList = [];
+        parent.mDataList = [];
+       parent.insTb = table.render({
+            elem: '#tb1',
+            data: [],
+            page: false,
+            cellMinWidth: 100,
+            cols: [[
+                {type: 'checkbox', title: '#',width:'3%'},
+                {type: 'numbers', title: '#',width:'3%'},
+                {field: 'productCategory', title: '模块',width:'10%'},
+                {field: 'department', title: '部门' ,width:'13%'},
+                {field: 'departmentPeople', title: '人员' ,width:'12%'},
+                {field: 'responsibility', title: '职责' }
+            ]]
+        });
+        $("#libinglin-btn").click(function () {
+            top.layui.admin.open({
+                type: 2, //此处以iframe举例
+                title: '添加项目模块人员',
+                area: ['560px', '600px'],
+                shade: 0.8,
+                maxmin: false,
+                anim: 0,
+                closeBtn: 1,
+                offset: 'auto',
+                //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+                content: getProjectUrl() + 'page/add/add-test.html',
+                // btn2: function () {
+                //     layer.closeAll();
+                // }
+
+                // zIndex: layer.zIndex //重点1
+                // ,
+                success: function (layero,dIndex) {
+                    // console.log(layero);
+                    // form.on('submit(modelSubmitUser)', function (data) {
+                    //     console.log(data);
+                    //     mDataList.push(data.field);
+                    //     console.log(mDataList);
+                    //     insTb.reload({data: mDataList});
+                    //     // layer.close(dIndex);
+                    //     // $(".layui-table-view").css("display","block");
+                    //     return false;
+                    // });
+                    var body = layer.getChildFrame('body', dIndex); // 获取弹出层iframe层的对象
+                    // console.log(body.html());
+                },
+                cancel: function (index, layero) {
+                    // if (confirm('确定要关闭么')) { //只有当点击confirm框的确定时，该层才会关闭
+                    //     layer.close(index);
+                    // }
+                    // return false;
+                }
+            });
+        });
+
+        // 添加组长和负责人点击框事件
+        // $('#libinglin,#libinglin1').on("mouseover",function () {
+        //     $(this).css("cursor","pointer");
+        // });
+        // $('#libinglin,#libinglin1').on("click",function () {
+        //     top.layui.admin.open({
+        //         type: 2, //此处以iframe举例
+        //         title: '添加项目模块人员',
+        //         area: ['460px', '450px'],
+        //         shade: 0.8,
+        //         maxmin: false,
+        //         anim: 0,
+        //         closeBtn: 1,
+        //         offset: 'auto',
+        //         //这里content是一个URL，如果你不想让iframe出现滚动条，你还可以content: ['http://sentsin.com', 'no']
+        //         content: getProjectUrl() + 'page/add/addPeople-all.html'
+        //     });
+        // });
+
+        // 监听表单提交
+        // form.on('submit(formSubmitAdv)', function (data) {
+        //     // 验证表格选择
+        //     var checkRows = table.checkStatus('tableFormAdv');
+        //     if (checkRows.data.length == 0) {
+        //         layer.tips('请至少选择一位成员', '#tableFormAdv+.layui-table-view .layui-table-header th:eq(0) div', {tips: [1, '#ff4c4c']});
+        //         return false;
+        //     }
+        //     // 表格选择的数据放到data.field中
+        //     data.field.checkUsers = checkRows;
+        //     layer.msg(JSON.stringify(data.field));
+        //     return false;
+        // });
+
+        // var libinglinn = function () {
+        //     insTb.reload({data: window.mDataList});
+        // };
+
+        // var li = parent.data;
+        // var bi = parent.data;
+        // console.log(li);
+        // console.log(bi);
+        // console.log(parent.libinglin);
+    });
+</script>
+</body>
+
+</html>

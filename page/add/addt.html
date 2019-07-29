@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>外销项目立项</title>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/libs/layui/css/layui.css"/>
+    <link rel="stylesheet" href="/SKYWORTH_PMS/iframe/assets/module/admin.css?v=312"/>
+    <style>
+        #export-pin .layui-form-item {
+            margin-bottom: 0;
+            margin-top: 20px;
+        }
+
+        #export-pin .layui-form-item .layui-inline {
+            margin-bottom: 25px;
+            margin-right: 0;
+        }
+
+        .form-group-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, .05);
+        }
+        .layui-form-label{
+            padding: 9px 0px;
+            width: 66px;
+        }
+        .layui-input-block{
+            margin-left: 80px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 加载动画 -->
+<!--<div class="page-loading">-->
+<!--    <div class="ball-loader">-->
+<!--        <span></span><span></span><span></span><span></span>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- 正文开始 -->
+<form class="layui-form" lay-filter="Export-pin" id="export-pin">
+    <div class="layui-fluid" style="padding-bottom: 75px;">
+
+        <!--        机型、机芯选择-->
+        <div class="layui-card">
+            <div class="layui-card-header">机型、机芯选择
+                <div class="layui-btn layui-btn-danger" id="asdasd">adasd</div>
+
+            </div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">机型 :</label>
+                        <div class="layui-input-block">
+                            <input name="machinname" type="text" placeholder="请输入机型" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">机芯 :</label>
+                        <div class="layui-input-block">
+                            <input name="inner" type="text" class="layui-input" placeholder="请输入机芯"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        初定时间节点-->
+        <div class="layui-card">
+            <div class="layui-card-header">初定时间节点</div>
+            <div class="layui-card-body">
+
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md6 layui-col-xs6 ">
+                        <label class="layui-form-label">EVT :</label>
+                        <div class="layui-input-block">
+                            <input name="evt" type="text" class="layui-input" id="dayChoice1" placeholder="yyyy-MM-dd" >
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6 layui-col-xs6">
+                        <label class="layui-form-label">DVT :</label>
+                        <div class="layui-input-block">
+                            <input name="dvt" type="text" class="layui-input" id="dayChoice2" placeholder="yyyy-MM-dd" >
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6 layui-col-xs6">
+                        <label class="layui-form-label">PVT :</label>
+                        <div class="layui-input-block">
+                            <input name="pvt" type="text" class="layui-input" id="dayChoice3" placeholder="yyyy-MM-dd" >
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6 layui-col-xs6">
+                        <label class="layui-form-label">PMP :</label>
+                        <div class="layui-input-block">
+                            <input name="pmp" type="text" class="layui-input" id="dayChoice4" placeholder="yyyy-MM-dd" >
+                        </div>
+                    </div><div class="layui-inline layui-col-md6 layui-col-xs6">
+                    <label class="layui-form-label">MP :</label>
+                    <div class="layui-input-block">
+                        <input name="mp" type="text" class="layui-input" id="dayChoice5" placeholder="yyyy-MM-dd" >
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        产品类型和原型机-->
+        <div class="layui-card">
+            <!--            <div class="layui-card-header">功能描述和要求</div>-->
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">产品类型 :</label>
+                        <div class="layui-input-block">
+                            <select name="machinetype" lay-filter="productCategoryChoice" lay-verType="tips" lay-verify="required">
+                                <option value=""></option>
+                                <option value="全新产品" selected="">全新产品</option>
+                                <option value="派生产品">派生产品</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline layui-col-md6">
+                        <label class="layui-form-label">原型机 :</label>
+                        <div class="layui-input-block">
+                            <input name="parentname" type="text" class="layui-input"
+                                   lay-verType="tips" lay-verify="required" required/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        派生差异-->
+        <div class="layui-card layui-hide" id="paisheng">
+            <!--            <div class="layui-card-header">备注</div>-->
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">派生差异 :</label>
+                        <div class="layui-input-block">
+                            <!--                            <textarea name="paishengchayi" placeholder="请输入内容" lay-verType="tips" lay-verify="required" class="layui-textarea"></textarea>-->
+                            <input name="diff" id="paishenginput" type="text" class="layui-input"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--        备注-->
+        <div class="layui-card">
+            <!--            <div class="layui-card-header">备注</div>-->
+            <div class="layui-card-body">
+                <div class="layui-form-item layui-row">
+                    <div class="layui-inline layui-col-md12">
+                        <label class="layui-form-label">备注事项 :</label>
+                        <div class="layui-input-block">
+                            <textarea name="remark" placeholder="请输入内容" lay-verType="tips" lay-verify="required" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group-bottom text-right" style="margin: 0 auto; width: 96%;">
+        <button type="reset" class="layui-btn layui-btn-primary">&emsp;重置&emsp;</button>
+        <button class="layui-btn" lay-filter="formSubmitAdv" lay-submit>&emsp;提交&emsp;</button>
+    </div>
+
+</form>
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/libs/layui/layui.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="/SKYWORTH_PMS/iframe/assets/js/common.js?v=312"></script>
+
+<script>
+    layui.use(['layer', 'form', 'table', 'util', 'laydate','admin'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+        var table = layui.table;
+        var util = layui.util;
+        var laydate = layui.laydate;
+        var admin = layui.admin;
+
+        // laydate加载
+        var elemChoice = '#dayChoice'; // 定义一个test的选择器
+        for (var i = 1; i < 6; i++) {
+            elemChoice = '#dayChoice';
+            elemChoice = elemChoice+i;
+            // console.log(elemChoice);
+            laydate.render({
+                elem:elemChoice
+                // ,theme:libinglin
+            });
+        }
+
+        // 监听select选择是否要显示隐藏派生差异
+        form.on('select(productCategoryChoice)', function(data){
+            console.log(data.value); //得到被选中的值
+            if (data.value == "派生产品") {
+                $("#paisheng").removeClass("layui-hide");
+                $("#paisheng").addClass("layui-show");
+                $("#paishenginput").attr({"lay-verType":"tips","lay-verify":"required"});
+            }else{
+                $("#paisheng").removeClass("layui-show");
+                $("#paisheng").addClass("layui-hide");
+                $("#paishenginput").removeAttr("lay-verType");
+                $("#paishenginput").removeAttr("lay-verify");
+            }
+        });
+        $("#asdasd").on("click",function () {
+            $("input").val("1");
+        });
+
+        // 监听表单提交
+        var machinesobj = {};
+        machinesobj.machineDetail = [];
+        form.on('submit(formSubmitAdv)', function (data) {
+            // layer.msg(JSON.stringify(data.field));
+            var machinesoba = null;
+            console.log(data);
+            console.log(data.field);
+            window.parent.machinesobjx.push(data.field);
+            // machineobj
+            machinesobj.machinname = data.field.machinname;
+            machinesobj.inner = data.field.inner;
+            if (data.field.machinetype == "全新产品") {
+                machinesobj.machinetype = 1;
+            }else{
+                machinesobj.machinetype = 2;
+            }
+            machinesobj.parentname = data.field.parentname;
+            machinesobj.remark = data.field.remark;
+            machinesobj.diff = data.field.diff;
+
+            //machineDetail
+            machinesobj.machineDetail.splice(0,machinesobj.machineDetail.length);
+            if (data.field.evt) {
+                var machineDetail = {};
+                machineDetail.milepost = 1;
+                machineDetail.miletime = (new Date(data.field.evt)).getTime();
+                machinesobj.machineDetail.push(machineDetail);
+                console.log(machinesobj.machineDetail);
+            }
+            if (data.field.dvt) {
+                var machineDetail = {};
+                machineDetail.milepost = 2;
+                machineDetail.miletime = (new Date(data.field.dvt)).getTime();
+                machinesobj.machineDetail.push(machineDetail);
+                console.log(machinesobj.machineDetail);
+            }
+            if (data.field.pvt) {
+                var machineDetail = {};
+                machineDetail.milepost = 3;
+                machineDetail.miletime = (new Date(data.field.pvt)).getTime();
+                machinesobj.machineDetail.push(machineDetail);
+            }
+            if (data.field.pmp) {
+                var machineDetail = {};
+                machineDetail.milepost = 4;
+                machineDetail.miletime = (new Date(data.field.pmp)).getTime();
+                machinesobj.machineDetail.push(machineDetail);
+            }
+            if (data.field.mp) {
+                var machineDetail = {};
+                machineDetail.milepost = 5;
+                machineDetail.miletime = (new Date(data.field.mp)).getTime();
+                machinesobj.machineDetail.push(machineDetail);
+            }
+            // window.parent.machinesobb.push(window.parent.machinesobj);
+            window.parent.machinesobb.push(machinesobj);
+            console.log(machinesobj);
+            console.log(window.parent.machinesobb);
+
+            var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+            // parent.productPlanData.push(data.field);
+            // parent.productPlanEle.reload({data: parent.productPlanData});
+            parent.layer.close(index); //再执行关闭
+            return false;
+        });
+    });
+</script>
+</body>
+
+</html>
