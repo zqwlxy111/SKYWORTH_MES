@@ -4,10 +4,22 @@
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<!--    浏览器标头图图标-->
     <link href="/SKYWORTH_MES/assets/images/guoqi.svg" rel="icon">
     <title>SKYWORTH创维MES系统数据可视化界面</title>
+<!--    引入layui的css-->
     <link rel="stylesheet" href="/SKYWORTH_MES/assets/libs/layui/css/layui.css"/>
+<!--    引入easyweb的css-->
     <link rel="stylesheet" href="/SKYWORTH_MES/assets/module/admin.css?v=312"/>
+
+<!--    ExtJs-->
+<!--    extjs4所需的js文件(包括核心,控件等)-->
+    <script type="text/javascript" src="/SKYWORTH_MES/assets/libs/extjs/js/ext-all-dev.js"></script>
+<!--    extjs4所需的本地语言js文件(使用简体中文)   注:该文件使用的中文编码为UTF-8,故这里需要加上charset=UTF-8,否则有可能会和用户自定义页面编码(比如GBK)起冲突,产生乱码-->
+    <script type="text/javascript" src="/SKYWORTH_MES/assets/libs/extjs/lang/ext-lang-zh_CN.js" charset="UTF-8"></script>
+<!--    extjs4所需的css文件-->
+    <link rel="stylesheet" type="text/css" href="/SKYWORTH_MES/assets/libs/extjs/ext-theme-classic/ext-theme-classic-all-debug.css">
+
 </head>
 <body>
 
@@ -15,6 +27,7 @@
 <div id="main" style="width: 600px;height:400px;"></div>
 
 </body>
+
 <!-- js部分 -->
 <script type="text/javascript" src="/SKYWORTH_MES/assets/libs/layui/layui.js"></script>
 <script type="text/javascript" src="/SKYWORTH_MES/assets/libs/jquery/jquery.js"></script>
@@ -29,28 +42,8 @@
     });
 </script>
 <script>
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
-
-    // 指定图表的配置项和数据
-    var option = {
-        series : [
-            {
-                name: '访问来源',
-                type: 'pie',
-                radius: '55%',
-                data:[
-                    {value:235, name:'视频广告'},
-                    {value:274, name:'联盟广告'},
-                    {value:310, name:'邮件营销'},
-                    {value:335, name:'直接访问'},
-                    {value:400, name:'搜索引擎'}
-                ]
-            }
-        ]
-    };
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+    Ext.onReady(function () {
+        Ext.Msg.alert('ad')
+    })
 </script>
 </html>
