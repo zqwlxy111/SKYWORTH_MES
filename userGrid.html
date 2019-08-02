@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--    浏览器标头图图标-->
+    <link href="/SKYWORTH_MES/assets/images/guoqi.svg" rel="icon">
+    <title>用户表格测试界面</title>
+    <link rel="stylesheet" href="/SKYWORTH_MES/assets/css/extMain.css">
+    <!--    ExtJs-->
+    <!--    extjs4所需的js文件(包括核心,控件等)-->
+    <script type="text/javascript" src="/SKYWORTH_MES/assets/libs/extjs/js/ext-all-dev.js"></script>
+    <!--    extjs4所需的本地语言js文件(使用简体中文)   注:该文件使用的中文编码为UTF-8,故这里需要加上charset=UTF-8,否则有可能会和用户自定义页面编码(比如GBK)起冲突,产生乱码-->
+    <script type="text/javascript" src="/SKYWORTH_MES/assets/libs/extjs/lang/ext-lang-zh_CN.js" charset="UTF-8"></script>
+    <!--    extjs4所需的css文件-->
+    <link rel="stylesheet" type="text/css" href="/SKYWORTH_MES/assets/libs/extjs/ext-theme-classic/ext-theme-classic-all-debug.css">
+
+</head>
+<body>
+</body>
+
+<!-- js部分 -->
+<script type="text/javascript" src="/SKYWORTH_MES/assets/libs/echarts/echarts.js"></script>
+<script>
+    Ext.onReady(function () {
+        //  定义一个实体类的model
+        Ext.define('User', {
+            extend: 'Ext.data.Model', // 继承
+            fields: [
+                {name: 'nickName'},
+                {name: 'sex'},
+                {name: 'phone'},
+            ]
+        });
+
+        // 创建数据源Store
+        var libinglinStore = Ext.create('Ext.data.Store',{
+            model:'User',
+            pageSize:10, // 请求的时候每页请求10条数据，用于修改page参数
+            proxy:{
+                type:'ajax',
+                url:'/SKYWORTH_MES/json/user.json',
+                reader:{
+                    type:'json',
+                    root:'data'
+                }
+            },
+            autoLoad:true  // 自动加载数据
+        })
+        // 创建gridpanel
+        Ext.create('Ext.grid.Panel',{
+            title:'用户管理',
+            iconCls:'top-monitor',
+            // height:700,
+            forceFit:true,
+            store:libinglinStore,
+            columnLines:true,
+            tbar: [
+                { xtype: 'button', text: '新增',iconCls:'add',/*listeners: {
+                        click: {
+                            element: this.element, //bind to the underlying el property on the panel
+                            fn: function(){ addWindow.show()}
+                        }
+                    }*/ handler:function () {
+                        addWindow.show();
+                    } },
+                { xtype: 'button', text: '删除',iconCls:'delete',handler:function () {
+
+                    } },
+                { xtype: 'button', text: '查询',iconCls:'submit',handler:function () {
+
+                    } },
+                { xtype: 'button', text: '刷新',iconCls:'refalsh',handler:function () {
+
+                    } }
+            ],
+            bbar:{ xtype: 'pagingtoolbar', store:libinglinStore,displayInfo:true},
+            columns: [
+                {xtype: 'rownumberer',width:35,align:'center'},
+                { header: 'Name',  dataIndex: 'nickName' ,align:'center'},
+                { header: 'Sex', dataIndex: 'sex', align:'center',renderer:function (value) {
+                        return value === '男'? 'male':'<font style="color: red">female</font>';
+                    }},
+                { header: 'Phone', dataIndex: 'phone',align:'center' }
+            ],
+            renderTo:Ext.getBody()
+        })
+
+        // 创建formPanel
+        var formPanel = Ext.create('Ext.form.Panel', {
+
+            // 将会通过 AJAX 请求提交到此URL
+            url: '/SKYWORTH_MES/json/user_save.json',
+
+            // 表单域 Fields 将被竖直排列, 占满整个宽度
+            layout: 'anchor',
+            bodyPadding: 5,
+            defaults: {
+                anchor: '100%'
+            },
+
+            // The fields
+            defaultType: 'textfield',
+            items: [{
+                fieldLabel: '姓名',
+                name: 'nickName',
+                allowBlank: false // 是否允许为空
+            },{
+                fieldLabel: '性别',
+                name: 'sex',
+                xtype:'combobox',
+                store: new Ext.data.ArrayStore({
+                   fields:['value','text'],
+                   data:[['male','男'],['female','女']]
+                }),
+                valueField:'value', // 提交到后台用的值
+                displayField:'text', // 展示给前台的值
+                allowBlank: false
+            },{
+                fieldLabel: '电话',
+                name: 'phone',
+                allowBlank: false
+            }],
+
+            // 重置 和 保存 按钮.
+            buttons: [{
+                text: '重置',
+                handler: function() {
+                    this.up('form').getForm().reset();
+                }
+            }, {
+                text: '保存',
+                formBind: true, //only enabled once the form is valid 当表单填写验证成功，表单提交按钮显示为可点击状态，否则为不可点击状态
+                disabled: true,
+                handler: function() {
+                    var form = this.up('form').getForm();
+                    if (form.isValid()) {
+                        form.submit({
+                            success: function(form, action) {
+                                Ext.Msg.alert('保存成功', action.result.msg);
+                            },
+                            failure: function(form, action) {
+                                Ext.Msg.alert('操作失败', action.result.msg);
+                            }
+                        });
+                    }
+                }
+            }],
+        });
+
+        // 表单的弹出框 -- 使用window
+        var addWindow = Ext.create('Ext.window.Window',{
+            title : '新增用户',
+            height:200,
+            width:400,
+            layout:'fit',
+            items:formPanel,
+            closeAction:'hide'
+        })
+
+    })
+</script>
+</html>
